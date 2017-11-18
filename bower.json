@@ -1,0 +1,22 @@
+{
+  "name": "mvc.apache.loc",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "piusha <piushakalyana@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Piusha/esoft",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public\\vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}

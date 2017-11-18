@@ -1,0 +1,236 @@
+-- Adminer 4.2.1 MySQL dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+DROP TABLE IF EXISTS `auth_tokens`;
+CREATE TABLE `auth_tokens` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `auth_tokens` (`id`, `user_id`, `token`, `created_at`, `updated_at`) VALUES
+(1,	'1',	'2520a2542ae1ca628dc2b16651e5ef6a',	'2017-09-01 23:08:46',	'2017-09-01 23:08:46'),
+(2,	'1',	'de75869611343aeb9aa0ebac82500cc9',	'2017-09-01 23:12:24',	'2017-09-01 23:12:24'),
+(3,	'1',	'af397a6f9c2d7c709d7cad015c5c1e12',	'2017-09-01 23:12:37',	'2017-09-01 23:12:37'),
+(4,	'1',	'25fbc145c1b8ea7f40ea2fe54f4796e6',	'2017-09-01 23:23:42',	'2017-09-01 23:23:42'),
+(5,	'1',	'c2ee52ad8789a1dd22e1c3273d9c1699',	'2017-09-01 23:26:33',	'2017-09-01 23:26:33'),
+(6,	'1',	'25cfebf36ec4ff92c0b0af8cc0a26bf8',	'2017-09-01 23:27:22',	'2017-09-01 23:27:22'),
+(7,	'1',	'0676852ee3029bca2662b8100f22ead0',	'2017-09-01 23:27:49',	'2017-09-01 23:27:49'),
+(8,	'1',	'40258f434d13c97acc0106e3f01e4744',	'2017-09-01 23:28:28',	'2017-09-01 23:28:28'),
+(9,	'2',	'7d4a8268b136e717e1626b4256848c7e',	'2017-09-02 00:18:22',	'2017-09-02 00:18:22'),
+(10,	'1',	'8493fb799e0b67bdf853989fccad3837',	'2017-09-02 00:35:31',	'2017-09-02 00:35:31'),
+(11,	'3',	'5967aff98b07bb57ea12fcf009bb3e55',	'2017-09-09 22:03:54',	'2017-09-09 22:03:54'),
+(12,	'3',	'a2cdeeecfa16fdf8b7deacd6a1187c9c',	'2017-09-09 22:05:01',	'2017-09-09 22:05:01'),
+(13,	'3',	'590c630818f6270e09b05873724a0c08',	'2017-09-09 22:05:27',	'2017-09-09 22:05:27'),
+(14,	'3',	'0d475f7d599c02dfdd030809ae9e5591',	'2017-09-09 22:06:28',	'2017-09-09 22:06:28'),
+(15,	'3',	'b9574d34c5f3202f202753004f3ce03d',	'2017-10-20 07:53:52',	'2017-10-20 07:53:52'),
+(16,	'3',	'ebaa6f8ebd0603887698e5c5dbe5eabb',	'2017-10-20 07:53:59',	'2017-10-20 07:53:59'),
+(17,	'3',	'748a0b5ab4f7a59957faeab3c2b2675b',	'2017-10-20 07:54:17',	'2017-10-20 07:54:17'),
+(18,	'3',	'a1f4aaa8d51c17df83e18dcdea38b3b9',	'2017-10-20 07:55:19',	'2017-10-20 07:55:19'),
+(19,	'3',	'cbf2ec82550cb6c4ad75d2d740ee7e56',	'2017-10-20 07:59:10',	'2017-10-20 07:59:10'),
+(20,	'3',	'7ba9a3616697c439a7dbfe411e0f868c',	'2017-10-20 07:59:18',	'2017-10-20 07:59:18'),
+(21,	'3',	'5db2da843a575d94d1bf160870b86457',	'2017-10-20 08:04:02',	'2017-10-20 08:04:02'),
+(22,	'3',	'f7d066255eaa3b67b50d32cb4a7b0284',	'2017-10-20 08:04:41',	'2017-10-20 08:04:41'),
+(23,	'3',	'b5035391e6fe407385174c93e367bec5',	'2017-10-20 08:04:53',	'2017-10-20 08:04:53'),
+(24,	'3',	'ca9056694f27241a445b2c1d10201816',	'2017-10-20 08:05:21',	'2017-10-20 08:05:21'),
+(25,	'3',	'4e5e6329ad0f754d709e2685d868e5b3',	'2017-10-20 08:08:22',	'2017-10-20 08:08:22'),
+(26,	'3',	'47520b26e41dd8ee1db437845a01ef57',	'2017-10-20 08:19:39',	'2017-10-20 08:19:39'),
+(27,	'3',	'7e5abafcadfe9f070e0befb892cc706e',	'2017-10-20 08:19:42',	'2017-10-20 08:19:42'),
+(28,	'3',	'8d0ac9a213e52e6d9080d674ac016cf1',	'2017-10-20 08:19:45',	'2017-10-20 08:19:45'),
+(29,	'3',	'd196de87c1a7bed7fcf0240d59728728',	'2017-10-20 08:19:48',	'2017-10-20 08:19:48'),
+(30,	'3',	'9fa541629b846c2ac7866ec66d3c1e67',	'2017-10-20 08:19:54',	'2017-10-20 08:19:54'),
+(31,	'3',	'6b084e11dcf295e354dbb4316c96df3c',	'2017-10-20 08:22:11',	'2017-10-20 08:22:11'),
+(32,	'3',	'98ff83d78c2eaf927f58ca0f2dca1d65',	'2017-10-20 08:22:15',	'2017-10-20 08:22:15'),
+(33,	'3',	'd3e349eb068f21bc05ecd6e76608a31d',	'2017-10-20 08:22:20',	'2017-10-20 08:22:20'),
+(34,	'3',	'9df55658c1e0570f5dc8ded3e450a7da',	'2017-10-20 08:22:24',	'2017-10-20 08:22:24'),
+(35,	'3',	'3eba95f3d1b701e3f40bc7efbe008bc9',	'2017-10-20 08:23:00',	'2017-10-20 08:23:00'),
+(36,	'3',	'dd556a933f24e76f08167a932efc406f',	'2017-10-20 08:23:27',	'2017-10-20 08:23:27'),
+(37,	'3',	'14722497422f9cd3cfe613d67515820e',	'2017-10-20 08:28:06',	'2017-10-20 08:28:06'),
+(38,	'3',	'70935be7d8adb1415876e6a9df526d4b',	'2017-10-20 08:28:15',	'2017-10-20 08:28:15'),
+(39,	'3',	'4f5e0ddc6cb635fa281804eae7248bd5',	'2017-10-20 08:28:30',	'2017-10-20 08:28:30'),
+(40,	'3',	'9e49a6eb865c7bf9253e4ceb68e6e4f8',	'2017-10-20 08:37:51',	'2017-10-20 08:37:51'),
+(41,	'3',	'ae629b449027a4755757ea4c023c423e',	'2017-10-23 02:11:45',	'2017-10-23 02:11:45'),
+(42,	'3',	'b0521b5016eb815a9908204c4c9d35b1',	'2017-10-23 03:56:12',	'2017-10-23 03:56:12');
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `status` smallint(6) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `categories` (`id`, `title`, `description`, `parent_id`, `status`, `created_at`, `updated_at`) VALUES
+(1,	'Phones',	'Nokia',	1,	1,	'2017-09-02 00:42:36',	'2017-09-02 00:42:36'),
+(2,	'phone 2',	'asd',	2,	1,	'2017-09-02 03:57:59',	'2017-09-02 03:57:59'),
+(3,	'phone 2',	'asd',	2,	1,	'2017-09-02 04:00:52',	'2017-09-02 04:00:52'),
+(4,	'phone 2',	'asd',	2,	1,	'2017-09-02 04:01:32',	'2017-09-02 04:01:32'),
+(5,	'phone 2',	'asd',	2,	1,	'2017-09-02 04:10:37',	'2017-09-02 04:10:37'),
+(6,	'phone 2',	'asd',	2,	1,	'2017-09-02 04:28:16',	'2017-09-02 04:28:16'),
+(7,	'phone 2',	'asd',	2,	1,	'2017-09-02 04:28:21',	'2017-09-02 04:28:21'),
+(30,	'Test',	'Test',	1,	1,	'2017-09-02 05:10:32',	'2017-09-02 05:10:32'),
+(31,	'New Category',	'New Category Description',	1,	1,	NULL,	NULL);
+
+DROP TABLE IF EXISTS `customers`;
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_code` int(20) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_email` varchar(45) DEFAULT NULL,
+  `customer_telephone` varchar(10) NOT NULL,
+  `customer_address` varchar(200) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `customer_code_UNIQUE` (`customer_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `customers` (`id`, `customer_code`, `customer_name`, `customer_email`, `customer_telephone`, `customer_address`, `created_at`, `updated_at`) VALUES
+(1,	1,	'Yaseer',	'ysr@gmail.com',	'755079009',	'asdasda',	'2017-09-02 16:37:10',	'2017-09-02 16:37:10'),
+(3,	2,	'Yas',	'ys@gmail.com',	'755079000',	'asdasd',	'2017-09-02 11:25:42',	'2017-09-02 11:25:42'),
+(5,	3,	'Yas',	'ys@gmail.com',	'755079000',	'asdasd',	'2017-09-02 11:26:24',	'2017-09-02 11:26:24'),
+(7,	4,	'Yas',	'ys@gmail.com',	'755079000',	'asdasd',	'2017-09-02 11:27:05',	'2017-09-02 11:27:05'),
+(8,	6,	'ys',	NULL,	'4545454',	'as',	'2017-09-02 11:27:24',	'2017-09-02 11:27:24'),
+(10,	7,	'asd',	NULL,	'44848',	'4848',	'2017-09-02 11:27:59',	'2017-09-02 11:27:59'),
+(11,	8,	'asasdasd',	'asda@gmail.com',	'87878',	'7878',	'2017-09-02 11:28:46',	'2017-09-02 11:28:46');
+
+DROP TABLE IF EXISTS `grn_details`;
+CREATE TABLE `grn_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `supplier_id` int(11) NOT NULL,
+  `item_id` int(10) unsigned NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `received_date` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `supplier_id` (`supplier_id`),
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `grn_details_ibfk_1` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`id`),
+  CONSTRAINT `grn_details_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `invoice`;
+CREATE TABLE `invoice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `item_id` int(10) unsigned NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `dispatch_date` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  CONSTRAINT `invoice_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `items`;
+CREATE TABLE `items` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `unit_price` double(8,2) NOT NULL,
+  `max_retail_price` double(8,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `reorder_level` int(11) NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `status` smallint(6) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `items` (`id`, `title`, `description`, `category_id`, `unit_price`, `max_retail_price`, `quantity`, `reorder_level`, `supplier_id`, `status`, `created_at`, `updated_at`) VALUES
+(1,	'X2',	'X2 Mobile',	1,	100.00,	150.00,	1,	10,	1,	1,	'2017-09-02 00:45:39',	'2017-09-02 00:45:39'),
+(2,	'item 2',	'asd',	1,	50.00,	60.00,	10,	50,	2,	1,	'2017-09-02 06:11:24',	'2017-09-02 06:11:24'),
+(3,	'item 2',	'asd',	1,	50.00,	60.00,	10,	50,	2,	1,	'2017-09-02 06:11:37',	'2017-09-02 06:11:37'),
+(4,	'item 2',	'asd',	1,	50.00,	60.00,	10,	50,	2,	1,	'2017-09-02 06:11:55',	'2017-09-02 06:11:55'),
+(5,	'item 3',	'asd',	2,	12.00,	15.00,	15,	12,	1,	1,	'2017-09-02 06:12:19',	'2017-09-02 06:12:19'),
+(6,	'Test',	'Test Des',	30,	10.00,	12.00,	100,	50,	8,	1,	'2017-10-20 04:12:17',	'2017-10-20 04:12:17'),
+(7,	'test title2',	'test Desc 2',	30,	11.00,	12.00,	111,	11,	4,	1,	'2017-10-20 04:30:41',	'2017-10-20 04:30:41'),
+(8,	'test title 4',	'test desc4',	2,	11.00,	11.00,	11,	1,	4,	1,	'2017-10-20 06:07:26',	'2017-10-20 06:07:26');
+
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1,	'2017_04_29_050828_create_categories_table',	1),
+(2,	'2017_04_29_051318_create_items_table',	1),
+(3,	'2017_04_29_051359_create_uploads_table',	1),
+(4,	'2017_05_06_060803_create_users_table',	2),
+(5,	'2017_05_06_061230_create_auth_tokens_table',	2);
+
+DROP TABLE IF EXISTS `suppliers`;
+CREATE TABLE `suppliers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` int(10) NOT NULL,
+  `supplier_code` varchar(100) NOT NULL,
+  `supplier_name` varchar(100) NOT NULL,
+  `supplier_telephone` varchar(10) NOT NULL,
+  `supplier_address` varchar(200) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `suppliers` (`id`, `item_id`, `supplier_code`, `supplier_name`, `supplier_telephone`, `supplier_address`, `created_at`, `updated_at`) VALUES
+(4,	1,	'001',	'YasSup',	'456456',	'asdasd',	'2017-09-02 12:08:25',	'2017-09-02 12:08:25'),
+(5,	1,	'001',	'YasSup',	'456456',	'asdasd',	'2017-09-02 12:10:48',	'2017-09-02 12:10:48'),
+(6,	2,	'001',	'YasSup',	'456456',	'asdasd',	'2017-09-02 12:12:11',	'2017-09-02 12:12:11'),
+(7,	2,	'002',	'asd',	'45454',	'asdas',	'2017-09-02 12:12:24',	'2017-09-02 12:12:24'),
+(8,	2,	'001',	'testsupp',	'45454',	'5545',	'2017-09-02 18:06:45',	'2017-09-02 18:06:45');
+
+DROP TABLE IF EXISTS `uploads`;
+CREATE TABLE `uploads` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `entity` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `entity_id` int(11) NOT NULL,
+  `meta` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attachments` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1,	'Yaseer',	'Yaseer',	'ysr@gmail.com',	'e10adc3949ba59abbe56e057f20f883e',	'2017-09-02 04:38:25',	'2017-09-02 04:38:25'),
+(2,	'Yas',	'Yas',	'yas@gmail.com',	'$2y$10$2X2r9cv0lQ78LDNOaY.ROO.7LU9r8C507ElHUMaUmbVSYQau.R5eG',	'2017-09-02 00:18:22',	'2017-09-02 00:18:22'),
+(3,	'Yaseer',	'Yaseer',	'admin@gmail.com',	'$2y$10$2X2r9cv0lQ78LDNOaY.ROO.7LU9r8C507ElHUMaUmbVSYQau.R5eG',	'2017-09-02 04:38:25',	'2017-09-02 04:38:25');
+
+-- 2017-10-24 06:09:19
