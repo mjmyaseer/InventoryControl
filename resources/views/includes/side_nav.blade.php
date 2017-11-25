@@ -20,6 +20,7 @@
         <li class="@php if($url == '/secure/stocks.html'){echo $selected;}@endphp"> <a href="{{url("/secure/stocks.html")}}"><i class="glyphicon glyphicon-calendar"></i> Stocks</a></li>
         <li class="@php if($url == '/secure/purchaseReturns.html'){echo $selected;}@endphp"> <a href="{{url("/secure/purchaseReturns.html")}}"><i class="glyphicon glyphicon-calendar"></i> Purchase Returns</a></li>
         <li class="@php if($url == '/secure/salesReturns.html'){echo $selected;}@endphp"> <a href="{{url("/secure/salesReturns.html")}}"><i class="glyphicon glyphicon-calendar"></i> Sales Returns</a></li>
+        <li class="@php if($url == '/secure/reports.html'){echo $selected;}@endphp"> <a href="{{url("/secure/reports.html")}}"><i class="glyphicon glyphicon-calendar"></i> Reports</a></li>
 
 
         <!--li><a href="stats.html"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>

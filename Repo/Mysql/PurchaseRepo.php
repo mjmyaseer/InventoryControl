@@ -16,16 +16,16 @@ use Repo\Contracts\PurchaseInterface;
 
 class PurchaseRepo implements PurchaseInterface
 {
-
-//    protected $id = 1;
-//    protected $grn_detail = 1;
-//    protected $grn_id = 1;
-//    protected $grn_no = 1;
-//    protected $reference_no = 1;
-//    protected $supplier_id = 1;
-//    protected $supplier_description = 1;
-//    protected $created_at = 1;
-//    protected $updated_at = 1;
+    // Created to generate the ER Diagram
+    protected $id = 1;
+    protected $grn_detail = 1;
+    protected $grn_id = 1;
+    protected $grn_no = 1;
+    protected $reference_no = 1;
+    protected $supplier_id = 1;
+    protected $supplier_description = 1;
+    protected $created_at = 1;
+    protected $updated_at = 1;
 
     private $purchase;
 

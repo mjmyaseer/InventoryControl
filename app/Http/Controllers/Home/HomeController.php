@@ -18,8 +18,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = $this->ledger->getLedger();
-//        echo"<pre>";
-//        print_r($data);exit();
+
         return view('home.index')->with('data', $data);
     }
 

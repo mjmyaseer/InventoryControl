@@ -24,6 +24,7 @@ class ItemsController extends Controller
      * ItemsController constructor.
      * @param ItemInterface $item
      * @param CategoryInterface $category
+     * @param SupplierInterface $supplier
      */
     public function __construct(ItemInterface $item,
                                 CategoryInterface $category,
@@ -63,7 +64,6 @@ class ItemsController extends Controller
 
     public function saveItem(Request $request)
     {
-//        dd($request);
         $validationRules = [
             'title' => 'required|unique:' . Item::TABLE . ',title',
             'description' => 'required',

@@ -18,6 +18,17 @@ use Repo\Contracts\PurchaseReturnsInterface;
 class PurchaseReturnsRepo implements PurchaseReturnsInterface
 {
     private $purchase;
+    // Created to generate the ER Diagram
+
+    protected $id = 1;
+    protected $purchase_id = 1;
+    protected $item_id = 1;
+    protected $supplier_id = 1;
+    protected $quantity = 1;
+    protected $order_date = 1;
+    protected $created_by = 1;
+    protected $updated_at = 1;
+
 
     public function __construct(PurchaseReturn $purchaseReturn)
     {

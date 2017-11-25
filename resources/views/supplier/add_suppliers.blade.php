@@ -31,10 +31,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Supplier Name</label>
-                                <textarea class="form-control"
-                                          placeholder="Supplier Name"
-                                          name="supplier_name" row="3"></textarea>
+                                <input class="form-control"
+                                       placeholder="Supplier Name"
+                                       type="text"
+                                       name="supplier_name"/>
                             </div>
+
                             <div class="form-group">
                                 <label>Telephone</label>
                                 <input class="form-control"

@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <br/>
-                            <label>Purchase Date</label>&nbsp;
+                            <label>Sale Date</label>&nbsp;
                             <div style="width: 200px" class="input-group date" data-provide="datepicker">
                                 <div id="sandbox-container">
                                     <input type="text" name="dispatch_date" type="text" class="form-control"/>

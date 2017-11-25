@@ -27,6 +27,7 @@
                             <th>Email</th>
                             <th>Telephone</th>
                             <th>Address</th>
+                            <th style="text-align: center">Edit</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,7 @@
                                 <td>{{$customer->customer_email}}</td>
                                 <td class="center"> {{$customer->customer_telephone}}</td>
                                 <td class="center">{{$customer->customer_address}}</td>
+                                <td style="text-align: center"><a href="#" >Edit</a></td>
                             </tr>
                         @endforeach
 

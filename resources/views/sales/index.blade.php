@@ -25,6 +25,7 @@
                             <th>Item</th>
                             <th>Quantity</th>
                             <th>Dispatch Date</th>
+                            <th>Unit Price</th>
                             <th>Return</th>
                         </tr>
                         </thead>
@@ -51,8 +52,9 @@
                                 <td>{{$x}}</td>
                                 <td>{{$category->customer_name}}</td>
                                 <td>{{$category->title}}</td>
-                                <td>{{$category->total}}</td>
+                                <td>{{$category->quantity}}</td>
                                 <td>{{$category->dispatch_date}}</td>
+                                <td>Rs. {{$category->unit_price}}</td>
                                 <td width="20px"><!-- Trigger the modal with a button -->
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#myModal-{{$category->id}}" {{$status}}>

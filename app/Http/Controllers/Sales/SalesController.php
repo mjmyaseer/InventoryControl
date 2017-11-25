@@ -49,7 +49,7 @@ class SalesController extends Controller
     public function index($keyword = null)
     {
         $sales = $this->sales->index($keyword);
-
+//dd($sales);
         return view('sales.index')->with('sales', $sales);
     }
 

@@ -48,20 +48,20 @@ class ReportsController extends Controller
 
         if ($category == 1) {
             $sales = $this->sales->index($keyword);
-            dd($sales);
-            return view('print.printPDF');
+//            dd($sales);
+            return view('print.sales')->with('sales',$sales);
         } elseif ($category == 2) {
             $purchase = $this->purchase->index($keyword);
-            dd($purchase);
-            return view('print.printPDF');
+//            dd($purchase);
+            return view('print.purchase')->with('purchase',$purchase);
         } elseif ($category == 3) {
             $salesReturns = $this->salesReturn->getSalesReturns($id = null, $keyword);
-            dd($salesReturns);
-            return view('print.printPDF');
+
+            return view('print.salesReturns')->with('salesReturns',$salesReturns);
         } elseif ($category == 4) {
             $purchaseReturns = $this->purchaseReturns->getPurchaseReturns($id = null, $keyword);
-            dd($purchaseReturns);
-            return view('print.printPDF');
+//            dd($purchaseReturns);
+            return view('print.purchaseReturns')->with('purchaseReturns',$purchaseReturns);
         }
 
 

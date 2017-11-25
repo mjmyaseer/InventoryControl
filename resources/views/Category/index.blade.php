@@ -24,6 +24,7 @@
                             <th>#Id</th>
                             <th>Title</th>
                             <th>Description</th>
+                            <th style="text-align: center">Edit</th>
                             {{--<th>Parent</th>--}}
                         </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                 <td>{{$category->title}}</td>
                                 <td>{{$category->description}}</td>
 {{--                                <td>{{$category->parent_id}}</td>--}}
+                                <td style="text-align: center"><a href="#" >Edit</a></td>
                                </tr>
                         @endforeach
 

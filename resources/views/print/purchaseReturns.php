@@ -50,69 +50,45 @@
 
 
     <div align="center">
-        <span class="topics" style="text-decoration: underline;">Vehicle Details - වාහනයේ තොරතුරු </span>
+        <span class="topics" style="text-decoration: underline;">Purchase Returns Informations </span>
     </div>
 
-<!--    <table class="table" border="0">-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--            <td class="td-line">-->
-<!--                <div class="row">-->
-<!--                    <span class="topics">Vehicle Registration Number /වාහන ලියාපදිංචි අංකය : </span>-->
-<!--                    <span> - --><?//=$taxiNo?><!--</span><br>-->
-<!--                    <span class="topics">Registration Year/ලියාපදිංචි කල වර්ෂය : </span>-->
-<!--                    <span> - _ _ _ _ _ _ _</span><br>-->
-<!--                    <span class="topics">Vehicle Color/ වාහනයේ වර්ණය : </span>-->
-<!--                    <span> - --><?//=$vehicleColor?><!--</span><br>-->
-<!--                    <span class="topics">Vehicle Make, model / වාහනයේ වර්ගය සහ මාදිලිය : </span>-->
-<!--                    <span> - --><?//=$makeName?><!-- --><?//=$modelName?><!--</span><br>-->
-<!--                    <span class="topics">Engine capacity/ එන්ජිමේ ධාරිතාවය : </span>-->
-<!--                    <span> - --><?//=$engineCapacity?><!--</span><br>-->
-<!--                    <span class="topics">Average speed/ සාමාන්&zwj;ය වේගය : </span>-->
-<!--                    <span> - --><?//=$taxiSpeed?><!--</span><br>-->
-<!--                    <span class="topics">Seating Capacity / ආසන ප්&zwj;රමාණය : </span>-->
-<!--                    <span> - --><?//=$taxiCapacity?><!--</span><br>-->
-<!--                    <span class="topics">Baggage limit/ගමන් මලු ප්&zwj;රමාණය : </span>-->
-<!--                    <span> - --><?//=$maxLuggage?><!--</span><br>-->
-<!--                    <span class="topics">Big/ලොකු : <input type="checkbox" name=""></span><span class="topics">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medium/මධ්&zwj;යම : <input type="checkbox" name=""></span><span class="topics">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Small/කුඩා : <input type="checkbox" name=""></span><br>-->
-<!--                    <span class="topics">Vehicle Insurance category: (Private/ hiring) / වාහනයේ රක්ෂණ වර්ගය (පුද්ගලික / කුලී) : </span>-->
-<!--                    <span> - --><?//=$insuaranceCategory?><!-- </span><br>-->
-<!--                    <span class="topics">Vehicle Insurance Expiry Date / වාහනයේ රක්ෂණය අවසන් වන දිනය : </span>-->
-<!--                    <span> - --><?//=$insuaranceExpDate?><!--</span><br>-->
-<!--                    <span class="topics">Date of last smoke test performed / අවසන් වරට දුම් පරික්ෂාව සිදුකල දිනය : </span>-->
-<!--                    <span> - </span><br>-->
-<!--                    <span class="topics">Vehicle Reporting Location / වාහනය වාර්තා කරන ස්ථානය : </span>-->
-<!--                    <span> - &nbsp;&nbsp;_ _ _ _ _ _ _ _ _ _ _ _ _</span><br>-->
-<!--                </div>-->
-<!--            </td>-->
-<!--        </tr><tr>-->
-<!--        </tr></tbody>-->
-<!--    </table>-->
-
-    <div class="row">
-      <span class="topics" style="text-align: justify;">I Confirm That The Details Given Above Regarding Myself, Vehicle Owner`s, Non Related Referees Are True And Accurate To The Best Of My Knowledge.: ඉහත සඳහන් කල මාගේ තොරතුරු , වාහනයේ තොරතුරු , වාහන අයිතිකරුගේ තොරතුරු , ඥාතීන් නොවන අයගේ තොරතුරු  යන සියල්ලක්ම සත්&zwj;ය සහ නිවැරදි තොරතුරු බව ප්&zwj;රකාශ කරමි.
-    </span>
-    </div>
-
-    <table class="table" border="0">
-        <tbody>
-
+    <table class="table" border="0.5" width="100%">
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>
+               Supplier Name
+            </th>
+            <th>
+               Item Name
+            </th>
+            <th>
+               Quantity
+            </th>
+            <th>
+               Order Date
+            </th>
         </tr>
+
+        <?php
+        $x = 1;
+        foreach ($purchaseReturns as $items){ ?>
         <tr>
-            <td> <div class="topics" align="center">________________________________ </div></td>
-            <td></td>
-            <td> <div class="topics" align="center">________________________________ </div></td>
+            <td>
+                <?php echo $items->supplier_name ?>
+            </td>
+            <td>
+                <?php echo $items->item_name ?>
+            </td>
+            <td>
+                <?php echo $items->quantity ?>
+            </td>
+            <td>
+                <?php echo $items->order_date ?>
+            </td>
+
         </tr>
-        <tr>
-            <td><div class="topics" align="center">Date / දිනය</div></td>
-            <td></td>
-            <td><div class="topics" align="center">Signature / දිනය </div></td>
-        </tr>
-        </tbody>
+
+        <?php  } ?>
     </table>
 
     <div class="page-break"></div>

@@ -17,6 +17,16 @@ class LedgerRepo implements ledgerInterface
 {
     private $ledger;
 
+    // Created to generate the ER Diagram
+
+    protected $id = 1;
+    protected $item_id = 1;
+    protected $quantity = 1;
+    protected $transaction_date = 1;
+    protected $unit_price = 1;
+    protected $created_at = 1;
+    protected $updated_at = 1;
+
     public function __construct(Ledger $ledger)
     {
         $this->ledger = $ledger;

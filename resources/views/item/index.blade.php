@@ -25,7 +25,8 @@
                             <th>Title</th>
                             <th>Unit Price</th>
                             <th>Reorder Level</th>
-                            <th>Quantity</th>
+                            <th style="text-align: center">Edit</th>
+                            {{--<th>Quantity</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -36,7 +37,8 @@
                                 <td><a href="{{url("/secure/view-item.html/{$item->id}")}}">{{$item->title}}</a></td>
                                 <td>{{$item->unit_price}}</td>
                                 <td class="center"> {{$item->reorder_level}}</td>
-                                <td class="center">{{$item->quantity}}</td>
+{{--                                <td class="center">{{$item->quantity}}</td>--}}
+                                <td style="text-align: center"><a href="#" >Edit</a></td>
                             </tr>
                         @endforeach
 

@@ -56,13 +56,14 @@
                                        type="text"
                                        name="max_retail_price"/>
                             </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
-                                <input class="form-control"
-                                       placeholder="Quantity"
-                                       type="number"
-                                       name="quantity"/>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label>Quantity</label>--}}
+                                {{--<input class="form-control"--}}
+                                       {{--placeholder="Quantity"--}}
+                                       {{--type="number"--}}
+                                       {{--name="quantity"/>--}}
+                            {{--</div>--}}
+
                             <div class="form-group">
                                 <label>Reorder Level</label>
                                 <input class="form-control"

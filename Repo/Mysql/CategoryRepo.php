@@ -32,7 +32,6 @@ class CategoryRepo implements CategoryInterface
     public function index()
     {
         return $categories = Category::all();
-//         view('category.index')->with('categories', $categories);
     }
 
     public function addCategory()

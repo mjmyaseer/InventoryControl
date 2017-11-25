@@ -14,6 +14,7 @@ class User extends Model
      * Get user information based on the email
      * @param $email
      *
+     * @return Model|null|static
      */
 
     public function getUserByEmail($email){

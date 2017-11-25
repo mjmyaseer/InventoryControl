@@ -10,12 +10,7 @@
                 <div class="panel-heading">
                     <div class="panel-title">Reports</div>
 
-                    <div class="panel-options">
-                        <a href="{{url('/secure/add-customers.html')}}"
-                           data-rel="collapse">Add New Customer</a>
-                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-                    </div>
-                </div>
+
                 <div class="panel-body">
 
                     <form action="" method="POST" id="frm_customer" class="form-inline">

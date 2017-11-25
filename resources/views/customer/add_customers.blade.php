@@ -28,12 +28,15 @@
                                        type="text"
                                        name="customer_code"/>
                             </div>
+
                             <div class="form-group">
                                 <label>Customer Name</label>
-                                <textarea class="form-control"
-                                          placeholder="Customer Name"
-                                          name="customer_name" row="3"></textarea>
+                                <input class="form-control"
+                                       placeholder="Customer Name"
+                                       type="text"
+                                       name="customer_name"/>
                             </div>
+
                             <div class="form-group">
                                 <label>Email</label>
                                 <input class="form-control"
