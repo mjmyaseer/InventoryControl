@@ -9,18 +9,18 @@
         $selected = 'current';
         @endphp
         <!-- Main menu -->
-        <li class="@php if($url == '/secure/dashboard.html'){echo $selected;}@endphp">  <a href="{{url("/secure/dashboard.html")}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-        <li class="@php if($url == '/secure/categories.html' || ){echo $selected;}@endphp"> <a href="{{url("/secure/categories.html")}}"><i class="glyphicon glyphicon-calendar"></i> Categories</a></li>
-        <li class="@php if($url == '/secure/items.html'){echo $selected;}@endphp"> <a href="{{url("/secure/items.html")}}"><i class="glyphicon glyphicon-calendar"></i> Items</a></li>
-        <li class="@php if($url == '/secure/suppliers.html'){echo $selected;}@endphp"> <a href="{{url("/secure/suppliers.html")}}"><i class="glyphicon glyphicon-calendar"></i> Suppliers</a></li>
-        <li class="@php if($url == '/secure/customers.html'){echo $selected;}@endphp"> <a href="{{url("/secure/customers.html")}}"><i class="glyphicon glyphicon-calendar"></i> Customers</a></li>
-        <li class="@php if($url == '/secure/sales.html'){echo $selected;}@endphp"> <a href="{{url("/secure/sales.html")}}"><i class="glyphicon glyphicon-calendar"></i> Sales</a></li>
-        <li class="@php if($url == '/secure/purchase.html'){echo $selected;}@endphp"> <a href="{{url("/secure/purchase.html")}}"><i class="glyphicon glyphicon-calendar"></i> Purchase</a></li>
-        <li class="@php if($url == '/sign-up.html'){echo $selected;}@endphp"> <a href="{{url("/sign-up.html")}}"><i class="glyphicon glyphicon-calendar"></i> Users</a></li>
-        <li class="@php if($url == '/secure/stocks.html'){echo $selected;}@endphp"> <a href="{{url("/secure/stocks.html")}}"><i class="glyphicon glyphicon-calendar"></i> Stocks</a></li>
-        <li class="@php if($url == '/secure/purchaseReturns.html'){echo $selected;}@endphp"> <a href="{{url("/secure/purchaseReturns.html")}}"><i class="glyphicon glyphicon-calendar"></i> Purchase Returns</a></li>
-        <li class="@php if($url == '/secure/salesReturns.html'){echo $selected;}@endphp"> <a href="{{url("/secure/salesReturns.html")}}"><i class="glyphicon glyphicon-calendar"></i> Sales Returns</a></li>
-        <li class="@php if($url == '/secure/reports.html'){echo $selected;}@endphp"> <a href="{{url("/secure/reports.html")}}"><i class="glyphicon glyphicon-calendar"></i> Reports</a></li>
+            <li class="<?php  if($url == '/secure/dashboard.html'){echo $selected;} ?>">  <a href="<?php echo e(url("/secure/dashboard.html")); ?>"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+            <li class="<?php  if($url == '/secure/categories.html' || $url == '/secure/add-categories.html' ){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/categories.html")); ?>"><i class="glyphicon glyphicon-calendar"></i> Categories</a></li>
+            <li class="<?php  if($url == '/secure/items.html' || $url == '/secure/add-items.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/items.html")); ?>"><i class="glyphicon glyphicon-list"></i> Items</a></li>
+            <li class="<?php  if($url == '/secure/suppliers.html' || $url == '/secure/add-suppliers.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/suppliers.html")); ?>"><i class="glyphicon glyphicon-knight"></i> Suppliers</a></li>
+            <li class="<?php  if($url == '/secure/customers.html' || $url == '/secure/add-customers.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/customers.html")); ?>"><i class="glyphicon glyphicon-king"></i> Customers</a></li>
+            <li class="<?php  if($url == '/secure/sales.html' || $url == '/secure/add-sales.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/sales.html")); ?>"><i class="glyphicon glyphicon-hand-left"></i> Sales</a></li>
+            <li class="<?php  if($url == '/secure/purchase.html' || $url == '/secure/add-purchase.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/purchase.html")); ?>"><i class="glyphicon glyphicon-hand-right"></i> Purchase</a></li>
+            <li class="<?php  if($url == '/sign-up.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/sign-up.html")); ?>"><i class="glyphicon glyphicon-user"></i> Users</a></li>
+            <li class="<?php  if($url == '/secure/stocks.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/stocks.html")); ?>"><i class="glyphicon glyphicon-edit"></i> Stocks</a></li>
+            <li class="<?php  if($url == '/secure/purchaseReturns.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/purchaseReturns.html")); ?>"><i class="glyphicon glyphicon-arrow-left"></i> Purchase Returns</a></li>
+            <li class="<?php  if($url == '/secure/salesReturns.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/salesReturns.html")); ?>"><i class="glyphicon glyphicon-arrow-right"></i> Sales Returns</a></li>
+            <li class="<?php  if($url == '/secure/reports.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/reports.html")); ?>"><i class="glyphicon glyphicon-print"></i> Reports</a></li>
 
 
         <!--li><a href="stats.html"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>
