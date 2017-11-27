@@ -10,7 +10,7 @@
         @endphp
         <!-- Main menu -->
         <li class="@php if($url == '/secure/dashboard.html'){echo $selected;}@endphp">  <a href="{{url("/secure/dashboard.html")}}"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-        <li class="@php if($url == '/secure/categories.html'){echo $selected;}@endphp"> <a href="{{url("/secure/categories.html")}}"><i class="glyphicon glyphicon-calendar"></i> Categories</a></li>
+        <li class="@php if($url == '/secure/categories.html' || ){echo $selected;}@endphp"> <a href="{{url("/secure/categories.html")}}"><i class="glyphicon glyphicon-calendar"></i> Categories</a></li>
         <li class="@php if($url == '/secure/items.html'){echo $selected;}@endphp"> <a href="{{url("/secure/items.html")}}"><i class="glyphicon glyphicon-calendar"></i> Items</a></li>
         <li class="@php if($url == '/secure/suppliers.html'){echo $selected;}@endphp"> <a href="{{url("/secure/suppliers.html")}}"><i class="glyphicon glyphicon-calendar"></i> Suppliers</a></li>
         <li class="@php if($url == '/secure/customers.html'){echo $selected;}@endphp"> <a href="{{url("/secure/customers.html")}}"><i class="glyphicon glyphicon-calendar"></i> Customers</a></li>
