@@ -10,6 +10,7 @@ namespace repo\Mysql;
 
 use App\Http\Models\Customer;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Repo\Contracts\CustomerInterface;
 
 class CustomerRepo implements CustomerInterface
@@ -30,15 +31,32 @@ class CustomerRepo implements CustomerInterface
         $this->customer = $customer;
     }
 
-    public function index()
+    public function index($id = null)
     {
-        return $customers = Customer::all();
+        $query = DB::table(Customer::TABLE)
+            ->select(Customer::TABLE.'.id as customer_id',Customer::TABLE.'.customer_code as customer_code',
+                Customer::TABLE.'.customer_name as customer_name',Customer::TABLE.'.customer_email as customer_email',
+                Customer::TABLE.'.customer_telephone as customer_telephone',
+                Customer::TABLE.'.customer_address as customer_address',
+                Customer::TABLE.'.created_at as supplier_created_at',
+                Customer::TABLE.'.updated_at as supplier_updated_at');
+        if ($id != '') {
+            $query->where(Customer::TABLE . '.id', '=', $id);
+        }
+        $results = $query->get();
+
+        return $results;
     }
 
-    public function saveCustomer($request)
+    public function saveCustomer($id = null,$request)
     {
         try {
-            $customer = new Customer();
+            if($id != null){
+                $customer = $this->customer->where('id', $id)->first();
+            }else{
+                $customer = new Customer();
+            }
+
             $customer->customer_code = $request->customer_code;
             $customer->customer_name = $request->customer_name;
             $customer->customer_email = $request->customer_email;

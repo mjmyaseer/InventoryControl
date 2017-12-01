@@ -11,7 +11,7 @@
                     <div class="panel-title">Customers</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/add-customers.html')}}"
+                        <a href="{{url('/secure/add-customers')}}"
                            data-rel="collapse">Add New Customer</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
@@ -34,13 +34,13 @@
 
                         @foreach($customers as $key=>$customer)
                             <tr class="gradeX">
-                                <td>{{$customer->id}}</td>
+                                <td>{{$customer->customer_id}}</td>
                                 <td>{{$customer->customer_code}}</td>
                                 <td>{{$customer->customer_name}}</td>
                                 <td>{{$customer->customer_email}}</td>
                                 <td class="center"> {{$customer->customer_telephone}}</td>
                                 <td class="center">{{$customer->customer_address}}</td>
-                                <td style="text-align: center"><a href="#" >Edit</a></td>
+                                <td style="text-align: center"><a href="{{url("/secure/add-customers/{$customer->customer_id}")}}" >Edit</a></td>
                             </tr>
                         @endforeach
 

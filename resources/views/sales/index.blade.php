@@ -9,7 +9,7 @@
                     <div class="panel-title">Sales</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/add-sales.html')}}"
+                        <a href="{{url('/secure/add-sales')}}"
                            data-rel="collapse">New Sales</a>
                         <a href="{{url('sales')}}" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
@@ -52,7 +52,7 @@
                                 <td>{{$x}}</td>
                                 <td>{{$category->customer_name}}</td>
                                 <td>{{$category->title}}</td>
-                                <td>{{$category->quantity}}</td>
+                                <td>{{$category->sales_quantity}}</td>
                                 <td>{{$category->dispatch_date}}</td>
                                 <td>Rs. {{$category->unit_price}}</td>
                                 <td width="20px"><!-- Trigger the modal with a button -->

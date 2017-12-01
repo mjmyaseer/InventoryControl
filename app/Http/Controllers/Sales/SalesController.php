@@ -72,11 +72,11 @@ class SalesController extends Controller
         return view('sales.add_sales')->with('data', $data);
     }
 
-    public function saveSales(Request $request)
+    public function saveSales($id = null,Request $request)
     {
         $data = $request->all();
 
-        $sales = $this->sales->saveSales($data);
+        $sales = $this->sales->saveSales($id, $data);
 
         $ledger = $this->ledger->saveLedgerSales($data);
 
@@ -91,6 +91,6 @@ class SalesController extends Controller
 
         $sales = $this->sales->index();
 
-        return Redirect::to('secure/sales.html')->with('sales', $sales);
+        return Redirect::to('secure/sales')->with('sales', $sales);
     }
 }

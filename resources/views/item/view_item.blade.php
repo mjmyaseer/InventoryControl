@@ -13,7 +13,7 @@
                     <div class="panel-title">Items</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/items.html')}}"
+                        <a href="{{url('/secure/items')}}"
                            data-rel="collapse">Items</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>

@@ -10,6 +10,7 @@ namespace Repo\Mysql;
 
 use App\Http\Models\Category;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Repo\Contracts\CategoryInterface;
 
 class CategoryRepo implements CategoryInterface
@@ -29,9 +30,27 @@ class CategoryRepo implements CategoryInterface
         $this->category = $category;
     }
 
-    public function index()
+    public function index($id = null)
     {
-        return $categories = Category::all();
+            $query = DB::table(Category::TABLE)
+                ->select(Category::TABLE.'.id as category_id',Category::TABLE.'.title as category_title',
+                    Category::TABLE.'.description as category_description',
+                    Category::TABLE.'.status as category_status',Category::TABLE.'.created_at as category_created_at',
+                    Category::TABLE.'.updated_at as category_updated_at');
+            if ($id != '') {
+                $query->where(Category::TABLE . '.id', '=', $id);
+            }
+            $results = $query->get();
+
+            return $results;
+
+//        if($id != null)
+//        {
+//            return $this->category->where('id', $id)->first();
+//        }else{
+//            return $categories = Category::all();
+//        }
+
     }
 
     public function addCategory()
@@ -39,7 +58,7 @@ class CategoryRepo implements CategoryInterface
         return view('category.add_categories');
     }
 
-    public function saveCategory($request)
+    public function saveCategory($id = null,$request)
     {
         if (!$request->has('title')) {
             return response()->json([
@@ -48,10 +67,14 @@ class CategoryRepo implements CategoryInterface
             ], 200);
         }
         try {
-            $category = new Category();
+            if($id != null){
+                $category = $this->category->where('id', $id)->first();
+            }else{
+                $category = new Category();
+            }
+
             $category->title = $request->title;
             $category->description = $request->description;
-            $category->parent_id = $request->parent_id;
             $category->status = Category::ACTIVE;
 
             if ($category->save()) {

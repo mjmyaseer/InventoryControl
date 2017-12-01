@@ -11,7 +11,7 @@
                     <div class="panel-title">Categories</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/categories.html')}}"
+                        <a href="{{url('/secure/categories')}}"
                            data-rel="collapse">Categories</a>
                     </div>
                 </div>
@@ -26,13 +26,25 @@
                                 <input class="form-control"
                                        placeholder="Category Title"
                                        type="text"
-                                       name="title"/>
+                                       name="title"
+                                        value="@php
+                                        if(isset($categories[0]->category_title))
+                                        {
+                                        echo $categories[0]->category_title;
+                                        }
+                                        @endphp"
+                                />
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control"
+                                <textarea style="width: 25%; height: 100px" class="form-control"
                                           placeholder="Description"
-                                          name="description" row="3"></textarea>
+                                          name="description" row="3">@php
+                                        if(isset($categories[0]->category_description))
+                                        {
+                                        echo $categories[0]->category_description;
+                                        }
+                                    @endphp</textarea>
                             </div>
                             {{--<div class="form-group">--}}
                                 {{--<label>Parent Id</label>--}}

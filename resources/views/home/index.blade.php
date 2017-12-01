@@ -3,7 +3,7 @@
 
 @section("content")
 
-    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    <div id="piechart_3d" style="width: 1200px; height: 700px;"></div>
 
 
 

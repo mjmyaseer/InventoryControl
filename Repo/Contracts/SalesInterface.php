@@ -15,7 +15,7 @@ interface SalesInterface
 
     public function getSales();
 
-    public function saveSales($data);
+    public function saveSales($id = null,$data);
 
     public function salesReturnStatus($id);
 }

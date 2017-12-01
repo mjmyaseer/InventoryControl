@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Item;
 
 use App\Http\Models\Item;
+use Illuminate\Support\Facades\Redirect;
 use \Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,14 +42,27 @@ class ItemsController extends Controller
         return view('item.index')->with('items', $items);
     }
 
-    public function addItem()
+    public function addItem($id = null)
     {
-        $categories = $this->category->index();
-        $supplier = $this->supplier->index();
-        $data = array(
-            'categories'  => $categories,
-            'supplier'   => $supplier
-        );
+        if(isset($id) && $id != null){
+
+            $item = $this->item->index($id);
+//            dd($item);
+            $categories = $this->category->index();
+            $suppliers = $this->supplier->index();
+            $data = array(
+                'item'=> $item,
+                'categories'  => $categories,
+                'suppliers'   => $suppliers
+            );
+        }else{
+            $categories = $this->category->index();
+            $suppliers = $this->supplier->index();
+            $data = array(
+                'categories'  => $categories,
+                'suppliers'   => $suppliers
+            );
+        }
 
         return view('item.add_items')->with($data);
     }
@@ -62,20 +76,23 @@ class ItemsController extends Controller
         return view('item.view_item')->with('items', $items);
     }
 
-    public function saveItem(Request $request)
+    public function saveItem($id = null, Request $request)
     {
+
         $validationRules = [
-            'title' => 'required|unique:' . Item::TABLE . ',title',
+            'title' => 'required',
             'description' => 'required',
             'category_id' => 'required',
             'unit_price' => 'required',
             'max_retail_price' => 'required',
-            'quantity' => 'required',
             'reorder_level' => 'required',
             'supplier_id' => 'required'
         ];
-        $this->validate($request, $validationRules);
+        if (!isset($id)) {
+            $validationRules['title'] = 'required|unique:' . Item::TABLE . ',title';
+        }
 
+        $this->validate($request, $validationRules);
         if (!$request->has('title')) {
             return response()->json([
                 'status' => 'FAILED',
@@ -83,10 +100,10 @@ class ItemsController extends Controller
             ], 200);
         }
 
-        $items = $this->item->saveItem($request);
+        $items = $this->item->saveItem($id,$request);
         $items = $items['result'];
 
-        return view('item.index')->with('items', $items);
+        return Redirect::to('secure/items')->with('items', $items);
     }
 
     public function relation()

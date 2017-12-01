@@ -30,7 +30,7 @@ class SalesRepo implements SalesInterface
                     ->select(Sales::TABLE . '.*', Item::TABLE . '.*', Customer::TABLE . '.*', Sales::TABLE . '.quantity as total',
                         Customer::TABLE . '.id as customer_id', Sales::TABLE . '.id as id', Item::TABLE . '.id as item_id',
                         Sales::TABLE . '.created_at as created_at', Sales::TABLE . '.updated_at as updated_at',
-                        Sales::TABLE . '.status as status',
+                        Sales::TABLE . '.status as status',Sales::TABLE.'.quantity as sales_quantity',
                         DB::raw("(SELECT SUM((".Item::TABLE .".unit_price - ".Item::TABLE .".max_retail_price)* 
                         ".Item::TABLE .".quantity) FROM ". Item::TABLE ."
                                         ) as total"))
@@ -58,13 +58,18 @@ class SalesRepo implements SalesInterface
 
     }
 
-    public function saveSales($data)
+    public function saveSales($id = null,$data)
     {
         app('db')->beginTransaction();
 
         try {
             foreach ($data['order'] as $item) {
-                $sales = new Sales;
+                if($id != null){
+                    $sales = $this->sales->where('id', $id)->first();
+                }else{
+                    $sales = new Sales;
+                }
+
                 $sales->customer_id = $data['customer_id'];
                 $sales->category_id = $item['category'];
                 $sales->item_id = $item['item'];

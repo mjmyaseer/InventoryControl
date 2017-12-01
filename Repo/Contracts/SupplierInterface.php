@@ -10,7 +10,7 @@ namespace Repo\Contracts;
 
 interface SupplierInterface
 {
-    public function index();
+    public function index($id = null);
 
-    public function saveSupplier($request);
+    public function saveSupplier($id = null,$request);
 }

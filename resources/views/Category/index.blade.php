@@ -11,7 +11,7 @@
                     <div class="panel-title">Categories</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/add-categories.html')}}"
+                        <a href="{{url('/secure/add-categories')}}"
                            data-rel="collapse">Add New Category</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
@@ -32,11 +32,11 @@
 
                         @foreach($categories as $key=>$category)
                             <tr class="gradeX">
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->title}}</td>
-                                <td>{{$category->description}}</td>
+                                <td>{{$category->category_id}}</td>
+                                <td>{{$category->category_title}}</td>
+                                <td>{{$category->category_description}}</td>
 {{--                                <td>{{$category->parent_id}}</td>--}}
-                                <td style="text-align: center"><a href="#" >Edit</a></td>
+                                <td style="text-align: center"><a href="{{url("/secure/add-categories/{$category->category_id}")}}">Edit</a></td>
                                </tr>
                         @endforeach
 

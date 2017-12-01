@@ -9,9 +9,9 @@
                     <div class="panel-title">Orders</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/add-purchase.html')}}"
+                        <a href="{{url('/secure/add-purchase')}}"
                            data-rel="collapse">New Purchase</a>
-                        <a href="{{url('/secure/purchase.html')}}" data-rel="reload"><i
+                        <a href="{{url('/secure/purchase')}}" data-rel="reload"><i
                                     class="glyphicon glyphicon-refresh"></i></a>
                     </div>
                 </div>

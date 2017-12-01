@@ -11,7 +11,7 @@
                     <div class="panel-title">Suppliers</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/suppliers.html')}}"
+                        <a href="{{url('/secure/suppliers')}}"
                            data-rel="collapse">Suppliers</a>
                     </div>
                 </div>
@@ -26,7 +26,14 @@
                                 <input class="form-control"
                                        placeholder="Supplier Code"
                                        type="text"
-                                       name="supplier_code"/>
+                                       name="supplier_code"
+                                       value="@php
+                                           if (isset($suppliers[0]->supplier_code))
+                                   {
+                                   echo $suppliers[0]->supplier_code;
+                                   }
+                                       @endphp"
+                                />
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div>
                             <div class="form-group">
@@ -34,7 +41,14 @@
                                 <input class="form-control"
                                        placeholder="Supplier Name"
                                        type="text"
-                                       name="supplier_name"/>
+                                       name="supplier_name"
+                                       value="@php
+                                           if (isset($suppliers[0]->supplier_name))
+                                   {
+                                   echo $suppliers[0]->supplier_name;
+                                   }
+                                       @endphp"
+                                />
                             </div>
 
                             <div class="form-group">
@@ -42,14 +56,42 @@
                                 <input class="form-control"
                                        placeholder="Telephone"
                                        type="text"
-                                       name="supplier_telephone"/>
+                                       name="supplier_telephone"
+                                       value="@php
+                                           if (isset($suppliers[0]->supplier_telephone))
+                                   {
+                                   echo $suppliers[0]->supplier_telephone;
+                                   }
+                                       @endphp"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control"
+                                       placeholder="Email"
+                                       type="text"
+                                       name="supplier_email"
+                                       value="@php
+                                           if (isset($suppliers[0]->supplier_email))
+                                   {
+                                   echo $suppliers[0]->supplier_email;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                             <div class="form-group">
                                 <label>Address</label>
                                 <input class="form-control"
                                        placeholder="Address"
                                        type="text"
-                                       name="supplier_address"/>
+                                       name="supplier_address"
+                                       value="@php
+                                           if (isset($suppliers[0]->supplier_address))
+                                   {
+                                   echo $suppliers[0]->supplier_address;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                         </fieldset>
                         <div>

@@ -10,11 +10,11 @@ namespace Repo\Contracts;
 
 interface ItemInterface
 {
-    public function index();
+    public function index($id = null);
 
     public function viewItem($id);
 
-    public function saveItem($request);
+    public function saveItem($id = null,$request);
 
     public function inactiveItem();
 }

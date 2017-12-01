@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Supplier;
 
+use App\Http\Models\Supplier;
+use Illuminate\Support\Facades\Redirect;
 use \Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,16 +23,37 @@ class SuppliersController extends Controller
     public function index()
     {
         $suppliers = $this->supplier->index();
+//        dd($suppliers);
         return view('supplier.index')->with('suppliers', $suppliers);
     }
 
-    public function addSupplier()
+    public function addSupplier($id = null)
     {
-        return view('supplier.add_suppliers');
+        $suppliers = $this->supplier->index($id);
+
+        return view('supplier.add_suppliers')->with('suppliers',$suppliers);
     }
 
-    public function saveSupplier(Request $request)
+    public function saveSupplier($id = null,Request $request)
     {
+        $validationRules = [
+            'item_id' => 'required',
+            'supplier_code' => 'required',
+            'supplier_name' => 'required',
+            'supplier_email' => 'required',
+            'supplier_telephone' => 'required',
+            'supplier_address' => 'required',
+            'customer_address' => 'required'
+        ];
+        if (!isset($id)) {
+
+            $validationRules['supplier_code'] = 'required|unique:' . Supplier::TABLE . ',title';
+            $validationRules['supplier_email'] = 'required|unique:' . Supplier::TABLE . ',title';
+            $validationRules['supplier_telephone'] = 'required|unique:' . Supplier::TABLE . ',title';
+        }
+        $this->validate($request, $validationRules);
+
+
         if (!$request->has('supplier_code')) {
             return response()->json([
                 'status' => 'FAILED',
@@ -38,9 +61,9 @@ class SuppliersController extends Controller
             ], 200);
         }
 
-        $suppliers = $this->supplier->saveSupplier($request);
+        $suppliers = $this->supplier->saveSupplier($id,$request);
         $suppliers = $suppliers['result'];
 
-        return view('supplier.index')->with('suppliers', $suppliers);
+        return Redirect::to('secure/suppliers')->with('suppliers', $suppliers);
     }
 }

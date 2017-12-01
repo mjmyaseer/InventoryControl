@@ -11,7 +11,7 @@
                     <div class="panel-title">Items</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/add-items.html')}}"
+                        <a href="{{url('/secure/add-items')}}"
                            data-rel="collapse">Add New Item</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
@@ -34,11 +34,11 @@
                         @foreach($items as $key=>$item)
                             <tr class="gradeX">
                                 <td>{{$item->id}}</td>
-                                <td><a href="{{url("/secure/view-item.html/{$item->id}")}}">{{$item->title}}</a></td>
+                                <td><a href="{{url("/secure/view-item/{$item->id}")}}">{{$item->title}}</a></td>
                                 <td>{{$item->unit_price}}</td>
                                 <td class="center"> {{$item->reorder_level}}</td>
 {{--                                <td class="center">{{$item->quantity}}</td>--}}
-                                <td style="text-align: center"><a href="#" >Edit</a></td>
+                                <td style="text-align: center"><a href="{{url("/secure/add-items/{$item->id}")}}" >Edit</a></td>
                             </tr>
                         @endforeach
 

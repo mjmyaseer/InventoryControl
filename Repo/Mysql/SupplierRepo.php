@@ -10,6 +10,7 @@ namespace Repo\Mysql;
 
 use App\Http\Models\Supplier;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Repo\Contracts\SupplierInterface;
 
 class SupplierRepo implements SupplierInterface
@@ -17,29 +18,47 @@ class SupplierRepo implements SupplierInterface
     private $supplier;
     protected $supplier_code = 2;
     protected $supplier_name = 1;
-    protected $categories_id= 1;
+    protected $categories_id = 1;
     protected $supplier_telephone = 1;
     protected $supplier_address = 1;
     protected $created_at = 1;
-    protected $updated_at= 1;
+    protected $updated_at = 1;
 
     public function __construct(Supplier $supplier)
     {
         $this->supplier = $supplier;
     }
 
-    public function index()
+    public function index($id = null)
     {
-        return Supplier::all();
+        $query = DB::table(Supplier::TABLE)
+            ->select(Supplier::TABLE.'.id as supplier_id',Supplier::TABLE.'.item_id as item_id',
+                Supplier::TABLE.'.supplier_code as supplier_code',Supplier::TABLE.'.supplier_name as supplier_name',
+                Supplier::TABLE.'.supplier_telephone as supplier_telephone',
+                Supplier::TABLE.'.supplier_email as supplier_email',
+                Supplier::TABLE.'.supplier_address as supplier_address',
+                Supplier::TABLE.'.created_at as supplier_created_at',
+                Supplier::TABLE.'.updated_at as supplier_updated_at');
+        if ($id != '') {
+            $query->where(Supplier::TABLE . '.id', '=', $id);
+        }
+        $results = $query->get();
+
+        return $results;
     }
 
-    public function saveSupplier($request)
+    public function saveSupplier($id = null,$request)
     {
         try {
-            $supplier = new Supplier();
+            if($id != null){
+                $supplier = $this->supplier->where('id', $id)->first();
+            }else{
+                $supplier = new Supplier();
+            }
             $supplier->supplier_code = $request->supplier_code;
             $supplier->supplier_name = $request->supplier_name;
             $supplier->supplier_telephone = $request->supplier_telephone;
+            $supplier->supplier_email = $request->supplier_email;
             $supplier->supplier_address = $request->supplier_address;
 
             if ($supplier->save()) {
@@ -63,6 +82,6 @@ class SupplierRepo implements SupplierInterface
 
     public function inactiveSupplier()
     {
-        
+
     }
 }

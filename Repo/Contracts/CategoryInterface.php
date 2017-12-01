@@ -10,9 +10,9 @@ namespace Repo\Contracts;
 
 interface CategoryInterface
 {
-    public function index();
+    public function index($id = null);
 
     public function addCategory();
 
-    public function saveCategory($data);
+    public function saveCategory($id = null,$data);
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Category;
 
 //use App\Http\Models\Category;
+use App\Http\Models\Category;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
 use \Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,17 +24,29 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = $this->category->index();
+
         return view('category.index')->with('categories', $categories);
     }
 
-    public function addCategory()
+    public function addCategory($id = null)
     {
-        $categories = $this->category->index();
+        $categories = $this->category->index($id);
+//        dd($categories);
         return view('category.add_categories')->with('categories', $categories);
     }
 
-    public function saveCategory(Request $request)
+    public function saveCategory($id = null, Request $request)
     {
+        $validationRules = [
+            'title' => 'required',
+            'description' => 'required'
+        ];
+        if (!isset($id)) {
+
+            $validationRules['title'] = 'required|unique:' . Category::TABLE . ',title';
+        }
+        $this->validate($request, $validationRules);
+
         if (!$request->has('title')) {
             return response()->json([
                 'status' => 'FAILED',
@@ -40,9 +54,9 @@ class CategoriesController extends Controller
             ], 200);
         }
 
-       $categories = $this->category->saveCategory($request);
+       $categories = $this->category->saveCategory($id,$request);
         $categories = $categories['result'];
 
-        return view('category.index')->with('categories', $categories);
+        return Redirect::to('secure/categories')->with('categories', $categories);
     }
 }

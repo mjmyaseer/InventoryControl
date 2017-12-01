@@ -11,7 +11,7 @@
                     <div class="panel-title">Items</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/items.html')}}"
+                        <a href="{{url('/secure/items')}}"
                            data-rel="collapse">Items</a>
                     </div>
                 </div>
@@ -26,19 +26,39 @@
                                 <input class="form-control"
                                        placeholder="Item Title"
                                        type="text"
-                                       name="title"/>
+                                       name="title"
+                                       value="@php
+                                           if (isset($item[0]->item_title))
+                                   {
+                                   echo $item[0]->item_title;
+                                   }
+                                       @endphp"/>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control"
+                                <textarea style="width: 400px; height: 100px" class="form-control"
                                           placeholder="Description"
-                                          name="description" row="3"></textarea>
+                                          name="description" row="3">@php
+                                        if (isset($item[0]->item_description))
+                                {
+                                echo $item[0]->item_description;
+                                }
+                                    @endphp
+                                </textarea>
                             </div>
                             <div class="form-group">
                                 <label>Category Id</label>
-                                <select class="form-control"name="category_id">
-                                    @foreach($categories as $items)
-                                        <option value="{{$items->id}}">{{$items->title}}</option>
+                                <select class="form-control" name="category_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->category_id}}"
+                                                @php
+                                                    if (isset($item) && $item[0]->item_category_id == $category->category_id)
+                                                    {
+                                                    echo 'selected';
+                                                    }
+                                                @endphp
+
+                                        >{{$category->category_title}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -47,21 +67,35 @@
                                 <input class="form-control"
                                        placeholder="Unit Price"
                                        type="text"
-                                       name="unit_price"/>
+                                       name="unit_price"
+                                       value="@php
+                                           if (isset($item[0]->item_unit_price))
+                                   {
+                                   echo $item[0]->item_unit_price;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                             <div class="form-group">
                                 <label>Max Retail Price</label>
                                 <input class="form-control"
                                        placeholder="Max retail price"
                                        type="text"
-                                       name="max_retail_price"/>
+                                       name="max_retail_price"
+                                       value="@php
+                                           if (isset($item[0]->item_max_retail_price))
+                                   {
+                                   echo $item[0]->item_max_retail_price;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                             {{--<div class="form-group">--}}
-                                {{--<label>Quantity</label>--}}
-                                {{--<input class="form-control"--}}
-                                       {{--placeholder="Quantity"--}}
-                                       {{--type="number"--}}
-                                       {{--name="quantity"/>--}}
+                            {{--<label>Quantity</label>--}}
+                            {{--<input class="form-control"--}}
+                            {{--placeholder="Quantity"--}}
+                            {{--type="number"--}}
+                            {{--name="quantity"/>--}}
                             {{--</div>--}}
 
                             <div class="form-group">
@@ -69,13 +103,27 @@
                                 <input class="form-control"
                                        placeholder="Reorder level"
                                        type="number"
-                                       name="reorder_level"/>
+                                       name="reorder_level"
+                                       value="@php
+                                           if (isset($item[0]->item_reorder_level))
+                                   {
+                                   echo $item[0]->item_reorder_level;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                             <div class="form-group">
                                 <label>Supplier Name</label>
-                                <select class="form-control"name="supplier_id">
-                                    @foreach($supplier as $items)
-                                        <option value="{{$items->id}}">{{$items->supplier_name}}</option>
+                                <select class="form-control" name="supplier_id">
+                                    @foreach($suppliers as $supplier)
+                                        <option value="{{$supplier->id}}"
+                                                @php
+                                                    if (isset($item) && $item[0]->item_supplier_id == $supplier->id)
+                                                    {
+                                                    echo 'selected';
+                                                    }
+                                                @endphp
+                                        >{{$supplier->supplier_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

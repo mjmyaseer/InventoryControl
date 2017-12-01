@@ -11,7 +11,7 @@
                     <div class="panel-title">Suppliers</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/add-suppliers.html')}}"
+                        <a href="{{url('/secure/add-suppliers')}}"
                            data-rel="collapse">Add New Supplier</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
@@ -25,6 +25,7 @@
                             <th>Supplier Code</th>
                             <th>Name</th>
                             <th>Telephone</th>
+                            <th>Email</th>
                             <th>Address</th>
                             <th style="text-align: center">Edit</th>
                         </tr>
@@ -33,12 +34,13 @@
 
                         @foreach($suppliers as $key=>$supplier)
                             <tr class="gradeX">
-                                <td>{{$supplier->id}}</td>
+                                <td>{{$supplier->supplier_id}}</td>
                                 <td>{{$supplier->supplier_code}}</td>
                                 <td>{{$supplier->supplier_name}}</td>
                                 <td class="center"> {{$supplier->supplier_telephone}}</td>
+                                <td class="center"> {{$supplier->supplier_email}}</td>
                                 <td class="center">{{$supplier->supplier_address}}</td>
-                                <td style="text-align: center"><a href="#" >Edit</a></td>
+                                <td style="text-align: center"><a href="{{url("/secure/add-suppliers/{$supplier->supplier_id}")}}" >Edit</a></td>
                             </tr>
                         @endforeach
 

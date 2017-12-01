@@ -11,7 +11,7 @@
                     <div class="panel-title">Sales</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/customers.html')}}"
+                        <a href="{{url('/secure/customers.')}}"
                            data-rel="collapse">Suppliers</a>
                     </div>
                 </div>

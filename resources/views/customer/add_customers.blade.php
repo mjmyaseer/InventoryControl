@@ -11,7 +11,7 @@
                     <div class="panel-title">Customers</div>
 
                     <div class="panel-options">
-                        <a href="{{url('/secure/customers.html')}}"
+                        <a href="{{url('/secure/customers')}}"
                            data-rel="collapse">Customers</a>
                     </div>
                 </div>
@@ -26,7 +26,13 @@
                                 <input class="form-control"
                                        placeholder="Customer Code"
                                        type="text"
-                                       name="customer_code"/>
+                                       name="customer_code"
+                                       value="@php
+                                           if (isset($customers[0]->customer_code))
+                                   {
+                                   echo $customers[0]->customer_code;
+                                   }
+                                       @endphp"/>
                             </div>
 
                             <div class="form-group">
@@ -34,7 +40,14 @@
                                 <input class="form-control"
                                        placeholder="Customer Name"
                                        type="text"
-                                       name="customer_name"/>
+                                       name="customer_name"
+                                       value="@php
+                                           if (isset($customers[0]->customer_name))
+                                   {
+                                   echo $customers[0]->customer_name;
+                                   }
+                                       @endphp"
+                                />
                             </div>
 
                             <div class="form-group">
@@ -42,21 +55,42 @@
                                 <input class="form-control"
                                        placeholder="Email"
                                        type="email"
-                                       name="customer_email"/>
+                                       name="customer_email"
+                                       value="@php
+                                           if (isset($customers[0]->customer_email))
+                                   {
+                                   echo $customers[0]->customer_email;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                             <div class="form-group">
                                 <label>Telephone</label>
                                 <input class="form-control"
                                        placeholder="Telephone"
                                        type="text"
-                                       name="customer_telephone"/>
+                                       name="customer_telephone"
+                                       value="@php
+                                           if (isset($customers[0]->customer_telephone))
+                                   {
+                                   echo $customers[0]->customer_telephone;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                             <div class="form-group">
                                 <label>Address</label>
                                 <input class="form-control"
                                        placeholder="Address"
                                        type="text"
-                                       name="customer_address"/>
+                                       name="customer_address"
+                                       value="@php
+                                           if (isset($customers[0]->customer_address))
+                                   {
+                                   echo $customers[0]->customer_address;
+                                   }
+                                       @endphp"
+                                />
                             </div>
                         </fieldset>
                         <div>

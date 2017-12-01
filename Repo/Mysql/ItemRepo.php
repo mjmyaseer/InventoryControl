@@ -10,6 +10,7 @@ namespace Repo\Mysql;
 
 use App\Http\Models\Item;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Repo\Contracts\ItemInterface;
 
 class ItemRepo implements ItemInterface
@@ -33,9 +34,22 @@ class ItemRepo implements ItemInterface
         $this->item = $item;
     }
 
-    public function index()
+    public function index($id = null)
     {
-        return $items = Item::all();
+        $query = DB::table(Item::TABLE)
+            ->select(Item::TABLE.'.id as item_id',Item::TABLE.'.title as item_title',
+                Item::TABLE.'.description as item_description',Item::TABLE.'.category_id as item_category_id',
+                Item::TABLE.'.unit_price as item_unit_price',Item::TABLE.'.max_retail_price as item_max_retail_price',
+                Item::TABLE.'.quantity as item_quantity',Item::TABLE.'.reorder_level as item_reorder_level',
+                Item::TABLE.'.supplier_id as item_supplier_id',
+                Item::TABLE.'.status as item_status',Item::TABLE.'.created_at as item_created_at',
+                Item::TABLE.'.updated_at as item_updated_at');
+        if ($id != '') {
+            $query->where(Item::TABLE . '.id', '=', $id);
+        }
+        $results = $query->get();
+
+        return $results;
     }
 
     public function viewItem($id)
@@ -45,16 +59,22 @@ class ItemRepo implements ItemInterface
         return $items = Item::all()->where('id', $id);
     }
 
-    public function saveItem($request)
+    public function saveItem($id = null,$request)
     {
+
         try {
-            $item = new Item();
+
+            if($id != null){
+                $item = $this->item->where('id', $id)->first();
+            }else{
+                $item = new Item();
+            }
+
             $item->title = $request->title;
             $item->description = $request->description;
             $item->category_id = $request->category_id;
             $item->unit_price = $request->unit_price;
             $item->max_retail_price = $request->max_retail_price;
-            $item->quantity = $request->quantity;
             $item->reorder_level = $request->reorder_level;
             $item->supplier_id = $request->supplier_id;
             $item->status = Item::ACTIVE;

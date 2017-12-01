@@ -10,7 +10,7 @@ namespace Repo\Contracts;
 
 interface CustomerInterface
 {
-    public function index();
+    public function index($id = null);
 
-    public function saveCustomer($request);
+    public function saveCustomer($id = null,$request);
 }

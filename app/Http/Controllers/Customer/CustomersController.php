@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Http\Controllers\Customer;
+
 use App\Http\Models\Customer;
+use Illuminate\Support\Facades\Redirect;
 use \Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,25 +24,44 @@ class CustomersController extends Controller
     {
         $customers = $this->customer->index();
 
-        return view('customer.index')->with('customers',$customers);
+        return view('customer.index')->with('customers', $customers);
     }
 
-    public function addCustomer(){
-        return view('customer.add_customers');
+    public function addCustomer($id = null)
+    {
+
+        $customers = $this->customer->index($id);
+
+        return view('customer.add_customers')->with('customers', $customers);
     }
 
-    public function saveCustomer(Request $request){
+    public function saveCustomer($id = null, Request $request)
+    {
+        $validationRules = [
+            'customer_code' => 'required',
+            'customer_name' => 'required',
+            'customer_email' => 'required',
+            'customer_telephone' => 'required',
+            'customer_address' => 'required'
+        ];
+        if (!isset($id)) {
 
-        if(!$request->has('customer_code')){
+            $validationRules['customer_code'] = 'required|unique:' . Customer::TABLE . ',title';
+            $validationRules['customer_email'] = 'required|unique:' . Customer::TABLE . ',title';
+            $validationRules['customer_telephone'] = 'required|unique:' . Customer::TABLE . ',title';
+        }
+        $this->validate($request, $validationRules);
+
+        if (!$request->has('customer_code')) {
             return response()->json([
-                'status'=>'FAILED',
-                'error'=> Config::get('custom_messages.CUSTOMER_CODE_REQUIRED')
-            ],200);
+                'status' => 'FAILED',
+                'error' => Config::get('custom_messages.CUSTOMER_CODE_REQUIRED')
+            ], 200);
         }
 
-        $customers = $this->customer->saveCustomer($request);
+        $customers = $this->customer->saveCustomer($id, $request);
         $customers = $customers['result'];
 
-        return view('customer.index')->with('customers', $customers);
+        return Redirect::to('secure/customers')->with('customers', $customers);
     }
 }
