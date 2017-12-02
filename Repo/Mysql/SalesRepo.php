@@ -27,15 +27,14 @@ class SalesRepo implements SalesInterface
     public function index($keyword = null)
     {
         $query = DB::table(Sales::TABLE)
-                    ->select(Sales::TABLE . '.*', Item::TABLE . '.*', Customer::TABLE . '.*', Sales::TABLE . '.quantity as total',
-                        Customer::TABLE . '.id as customer_id', Sales::TABLE . '.id as id', Item::TABLE . '.id as item_id',
-                        Sales::TABLE . '.created_at as created_at', Sales::TABLE . '.updated_at as updated_at',
-                        Sales::TABLE . '.status as status',Sales::TABLE.'.quantity as sales_quantity',
-                        DB::raw("(SELECT SUM((".Item::TABLE .".max_retail_price - ".Item::TABLE .".unit_price)* 
-                        ".Item::TABLE .".quantity) FROM ". Item::TABLE ."
-                                        ) as total"))
-                    ->leftJoin(Item::TABLE, Item::TABLE . '.id', '=', Sales::TABLE . '.item_id')
-                    ->leftJoin(Customer::TABLE, Customer::TABLE . '.id', '=', Sales::TABLE . '.customer_id');
+            ->select(Sales::TABLE . '.*', Item::TABLE . '.*', Customer::TABLE . '.*', Sales::TABLE . '.quantity as total',
+                Customer::TABLE . '.id as customer_id', Sales::TABLE . '.id as id', Item::TABLE . '.id as item_id',
+                Sales::TABLE . '.created_at as created_at', Sales::TABLE . '.updated_at as updated_at',
+                Sales::TABLE . '.status as status', Sales::TABLE . '.quantity as sales_quantity',
+                DB::raw("(SELECT SUM((" . Item::TABLE . ".max_retail_price - " . Item::TABLE . ".unit_price)* 
+                        " . Item::TABLE . ".quantity) FROM " . Item::TABLE . ") as total"))
+            ->leftJoin(Item::TABLE, Item::TABLE . '.id', '=', Sales::TABLE . '.item_id')
+            ->leftJoin(Customer::TABLE, Customer::TABLE . '.id', '=', Sales::TABLE . '.customer_id');
 
         if ($keyword['start_date'] != '') {
 
@@ -59,15 +58,15 @@ class SalesRepo implements SalesInterface
 
     }
 
-    public function saveSales($id = null,$data)
+    public function saveSales($id = null, $data)
     {
         app('db')->beginTransaction();
 
         try {
             foreach ($data['order'] as $item) {
-                if($id != null){
+                if ($id != null) {
                     $sales = $this->sales->where('id', $id)->first();
-                }else{
+                } else {
                     $sales = new Sales;
                 }
 
