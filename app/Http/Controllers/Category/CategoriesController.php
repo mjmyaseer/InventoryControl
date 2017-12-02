@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 //use App\Http\Models\Category;
 use App\Http\Models\Category;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use \Log;
@@ -59,4 +60,6 @@ class CategoriesController extends Controller
 
         return Redirect::to('secure/categories')->with('categories', $categories);
     }
+
+
 }

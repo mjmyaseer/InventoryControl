@@ -80,7 +80,10 @@
 
         <?php
         $x = 1;
-        foreach ($sales as $items){ ?>
+        $grandTotal = 0;
+        foreach ($sales as $items){
+            $grandTotal += ($items->max_retail_price - $items->unit_price) * $items->quantity;
+            ?>
             <tr>
                 <td>
                     <?php echo $items->customer_name ?>
@@ -91,17 +94,18 @@
                 <td>
                     <?php echo $items->quantity ?>
                 </td>
-                <td>
+                <td style="width: 80px">
                     <?php echo $items->dispatch_date ?>
                 </td>
-                <td>
+                <td style="width: 20px">
                     Rs. <?php echo $items->unit_price ?>
                 </td>
-                <td>
+                <td style="width: 20px">
                     Rs. <?php echo $items->max_retail_price ?>
                 </td>
-                <td>
+                <td style="width: 80px">
                     Rs. <?php echo ($items->max_retail_price - $items->unit_price) * $items->quantity  ?>
+
                 </td>
 
             </tr>
@@ -126,8 +130,8 @@
             <td>
                 Total Profit
             </td>
-            <td>
-                Rs. <?php echo ($items->max_retail_price - $items->unit_price) * $items->quantity  ?>
+            <td style="width: 80px">
+                Rs. <?php echo $grandTotal;  ?>
             </td>
         </tr>
 

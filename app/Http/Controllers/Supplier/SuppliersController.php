@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Supplier;
 
 use App\Http\Models\Supplier;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
 use \Log;
 use Illuminate\Http\Request;
@@ -23,7 +25,7 @@ class SuppliersController extends Controller
     public function index()
     {
         $suppliers = $this->supplier->index();
-//        dd($suppliers);
+
         return view('supplier.index')->with('suppliers', $suppliers);
     }
 

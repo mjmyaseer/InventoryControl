@@ -89,8 +89,6 @@ Route::group(['prefix' => 'secure'], function () {
 
     Route::get('/reports', 'Reports\ReportsController@index');
     Route::post('/reports', 'Reports\ReportsController@saveReports');
-
-
 });
 
 //User related Routes

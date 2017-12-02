@@ -18,7 +18,7 @@
 
                         <label>Category</label>&nbsp;
                         <select class="form-control" style="width: 200px" type="text"
-                                name="report_category">
+                                name="report_category" id="category">
                             <option value="0" selected disabled>Select to Print</option>
                             <option value="1">Sales</option>
                             <option value="2">Purchase</option>
@@ -29,7 +29,7 @@
                         <label>Start Date</label>&nbsp;
                         <div style="width: 200px" class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <div id="sandbox-container">
-                                <input type="text" name="start_date" type="text" class="form-control"/>
+                                <input type="text" name="start_date" type="text" class="form-control" id="startdate"/>
                             </div>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
@@ -39,7 +39,7 @@
                         <label>End Date</label>&nbsp;
                         <div style="width: 200px" class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <div id="sandbox-container">
-                                <input type="text" name="end_date" type="text" class="form-control"/>
+                                <input type="text" name="end_date" type="text" class="form-control" id="enddate" />
 
                             </div>
                             <div class="input-group-addon">
@@ -53,7 +53,10 @@
                             <i class="fa fa-print"></i>
                             Print
                         </button>
-
+                        <button class="btn btn-primary" type="submit" id="export" name="export" value="1">
+                            <i class="fa fa-export"></i>
+                            Export
+                        </button>
                     </form>
                 </div>
             </div>
@@ -67,4 +70,36 @@
 @section('js')
     <script src="../js/app/reports.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+
+    <script>
+
+//        $("#export").click(function () {
+//
+//            var category = $("#category").val();
+//            var startdate = $("#startdate").val();
+//            var enddate = $("#enddate").val();
+//
+//            $.ajax({
+//                url: "/InventoryControl/public/secure/asd",
+//                type: "GET",
+//                 data: {category: category, startdate: startdate, enddate: enddate},
+//                dataType: "json",
+//                success: function (data) {
+//                    console.log(data);
+//
+//                    if (data.result == "success")
+//                    {
+//                            alert('success');
+//
+//                    } else {
+//                        alert('success');
+//                        }
+//                },
+//                error: function (data) {
+//
+//                }
+//            });
+//        });
+
+    </script>
 @endsection

@@ -31,13 +31,14 @@ class SalesRepo implements SalesInterface
                         Customer::TABLE . '.id as customer_id', Sales::TABLE . '.id as id', Item::TABLE . '.id as item_id',
                         Sales::TABLE . '.created_at as created_at', Sales::TABLE . '.updated_at as updated_at',
                         Sales::TABLE . '.status as status',Sales::TABLE.'.quantity as sales_quantity',
-                        DB::raw("(SELECT SUM((".Item::TABLE .".unit_price - ".Item::TABLE .".max_retail_price)* 
+                        DB::raw("(SELECT SUM((".Item::TABLE .".max_retail_price - ".Item::TABLE .".unit_price)* 
                         ".Item::TABLE .".quantity) FROM ". Item::TABLE ."
                                         ) as total"))
                     ->leftJoin(Item::TABLE, Item::TABLE . '.id', '=', Sales::TABLE . '.item_id')
                     ->leftJoin(Customer::TABLE, Customer::TABLE . '.id', '=', Sales::TABLE . '.customer_id');
 
         if ($keyword['start_date'] != '') {
+
             $query->where(Sales::TABLE . '.dispatch_date', '>=', $keyword['start_date'])
                 ->where(Sales::TABLE . '.dispatch_date', '<=', $keyword['end_date'])
                 ->where(Sales::TABLE . '.status', '=', 1);
