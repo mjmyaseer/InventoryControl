@@ -99,14 +99,16 @@ class PurchaseReturnsRepo implements PurchaseReturnsInterface
             }
 
             app('db')->commit();
-            return [
+            return $purchaseReturn['status'] = [
                 'status' => 'success',
+                'message' => 'Successfully Saved Purchase Returns',
                 'code' => '200'
             ];
         } catch (\Exception $ex) {
             app('db')->rollback();
-            return [
+            return $purchaseReturn['status'] = [
                 'status' => $ex->getMessage(),
+                'msg' => $ex->getMessage(),
                 'code' => '422'
             ];
         }

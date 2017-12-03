@@ -8,6 +8,15 @@
         <div class="col-md-12">
             <div class="content-box-large">
                 <div class="panel-heading">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="panel-title">Suppliers</div>
 
                     <div class="panel-options">

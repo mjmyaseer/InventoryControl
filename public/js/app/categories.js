@@ -1,26 +1,46 @@
-(function($){
+$("#submit").click(function () {
 
-    $('#frm_category').on('submit',function(e){
-        e.preventDefault();
+    var title=$("#title").val();
+    var description= $("#description").val();
 
-        var data = $(this).serialize();
+    if (title == '') {
+        $("#ons").text("Category Title field is required");
+        return false;
+    }else{
+        $("#ons").text("");
+    }
 
-        $.ajax({
-            method: "POST",
-            url: '/api/v1/saveCategory',
-            data: data
-        }).done(function( msg ) {
+    if (description == '') {
+        $("#ins").text("Category Description Field is required");
+        return false;
+    }else{
+        $("#ins").text("");
+    }
 
-            if(msg.status == "SUCCESS"){
-                location.href='/secure/categories.html'
-            }else{
-                alert(msg.error);
-            }
+});
 
-        });
+// (function($){
+//
+//     $('#frm_category').on('submit',function(e){
+//         e.preventDefault();
+//
+//         var data = $(this).serialize();
+//
+//         $.ajax({
+//             method: "POST",
+//             url: '/InventoryControl/public/secure/add-categories',
+//             data: data
+//         }).done(function( msg ) {
+//
+//             if(msg.status == "SUCCESS"){
+//                 location.href='/secure/categories'
+//             }else{
+//                 $("#ons").text(msg.error);
+//             }
+//
+//         });
+//
+//     });
+// })(jQuery);
 
-    });
 
-
-
-})(jQuery);

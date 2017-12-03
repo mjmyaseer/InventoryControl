@@ -31,9 +31,13 @@ class SuppliersController extends Controller
 
     public function addSupplier($id = null)
     {
-        $suppliers = $this->supplier->index($id);
+        if (!$id == null) {
+            $suppliers = $this->supplier->index($id);
 
-        return view('supplier.add_suppliers')->with('suppliers',$suppliers);
+            return view('supplier.add_suppliers')->with('suppliers',$suppliers);
+        }else{
+            return view('supplier.add_suppliers');
+        }
     }
 
     public function saveSupplier($id = null,Request $request)

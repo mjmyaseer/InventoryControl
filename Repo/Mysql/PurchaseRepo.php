@@ -83,8 +83,9 @@ class PurchaseRepo implements PurchaseInterface
 
             app('db')->commit();
 
-            return [
+            return $grn['result'] = [
                 'status' => 'success',
+                'message' => 'Successfully Saved Purchases',
                 'code' => '200'
 
             ];
@@ -93,8 +94,9 @@ class PurchaseRepo implements PurchaseInterface
 
             app('db')->rollback();
 
-            return [
+            return $grn['result'] = [
                 'status' => $ex->getMessage(),
+                'message' => $ex->getMessage(),
                 'code' => '422'
             ];
         }
@@ -111,9 +113,10 @@ class PurchaseRepo implements PurchaseInterface
 
             app('db')->commit();
 
-            return [
+            return $purchase['result'] = [
                 'status' => 'success',
-                'code' => '200'
+                'code' => '200',
+                'message' => 'Successfully saved Purchase Return Status',
 
             ];
 
@@ -121,8 +124,9 @@ class PurchaseRepo implements PurchaseInterface
 
             app('db')->rollback();
 
-            return [
+            return $purchase['result'] =  [
                 'status' => $ex->getMessage(),
+                'message' => $ex->getMessage(),
                 'code' => '422'
             ];
         }

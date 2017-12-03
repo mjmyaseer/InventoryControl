@@ -40,6 +40,7 @@ class ReportRepo implements ReportInterface
             if ($report->save()) {
                 $item['status'] = response()->json([
                     'status' => 'SUCCESS',
+                    'code' => 200,
                     'message' => Config::get('custom_messages.NEW_ITEM_ADDED')
                 ], 200);
 
@@ -51,8 +52,10 @@ class ReportRepo implements ReportInterface
 
             return $item['status'] = response()->json([
                 'status' => 'FAILED',
-                'error' => Config::get('custom_messages.ERROR_WHILE_ITEM_ADDING')
-            ], 200);
+                'code' => 422,
+                'error' => Config::get('custom_messages.ERROR_WHILE_ITEM_ADDING'),
+                'message' => $e->getMessage()
+            ], 420);
         }
     }
     

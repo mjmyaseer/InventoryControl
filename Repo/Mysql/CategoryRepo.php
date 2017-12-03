@@ -60,12 +60,6 @@ class CategoryRepo implements CategoryInterface
 
     public function saveCategory($id = null,$request)
     {
-        if (!$request->has('title')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CAT_TITLE_REQUIRED')
-            ], 200);
-        }
         try {
             if($id != null){
                 $category = $this->category->where('id', $id)->first();
@@ -78,10 +72,11 @@ class CategoryRepo implements CategoryInterface
             $category->status = Category::ACTIVE;
 
             if ($category->save()) {
-                $categories['status'] = response()->json([
+                $categories['status'] = [
                     'status' => 'SUCCESS',
+                    'code' => 200,
                     'message' => Config::get('custom_messages.NEW_CAT_ADDED')
-                ], 200);
+                ];
 
                 $categories['result'] = Category::all();;
                 return $categories;
@@ -90,10 +85,12 @@ class CategoryRepo implements CategoryInterface
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return $categories['status'] = response()->json([
+            return $categories['status'] = [
                 'status' => 'FAILED',
-                'error' => Config::get('custom_messages.ERROR_WHILE_CAT_ADDING')
-            ], 200);
+                'code' => 422,
+                'error' => Config::get('custom_messages.ERROR_WHILE_CAT_ADDING'),
+                'message' => $e->getMessage()
+            ];
         }
     }
 

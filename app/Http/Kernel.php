@@ -40,6 +40,10 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'checkEntry' => [
+            \App\Http\Middleware\CheckAuthentication::class,
+        ],
     ];
 
     /**
@@ -56,6 +60,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'apiauth'   =>\App\Http\Middleware\ApiAuthentication::class
+        'apiauth'   =>\App\Http\Middleware\ApiAuthentication::class,
+        'authEntry' => \App\Http\Middleware\CheckAuthentication::class,
     ];
 }

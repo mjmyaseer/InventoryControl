@@ -61,6 +61,7 @@ class SalesController extends Controller
     public function addSales()
     {
         $categories = $this->category->index();
+//        dd($categories);
         $items = $this->item->index();
         $customers = $this->customer->index();
 

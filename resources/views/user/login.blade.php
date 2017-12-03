@@ -7,7 +7,8 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="login-wrapper">
                 <div class="box">
-                    <form action="{{url('/api/sign-in')}}" class="login-form" method="POST" id="login_form">
+                    <form action="{{url('/sign-in.html')}}" class="login-form" method="POST" id="login_form">
+                        {{csrf_field()}}
                         <div class="content-wrap">
                             <h6>Sign In</h6>
                             <div class="alert alert-danger" id="alert_message">

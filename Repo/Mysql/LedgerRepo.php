@@ -128,14 +128,16 @@ class LedgerRepo implements ledgerInterface
             }
 
             app('db')->commit();
-            return [
+            return $ledger['status'] = [
                 'status' => 'success',
+                'message' => 'successfully saved',
                 'code' => '200'
             ];
         } catch (\Exception $ex) {
             app('db')->rollback();
-            return [
+            return $ledger['status'] = [
                 'status' => $ex->getMessage(),
+                'message' => $ex->getMessage(),
                 'code' => '422'
             ];
         }
@@ -170,15 +172,17 @@ class LedgerRepo implements ledgerInterface
                 $ledger->save();
             }
             app('db')->commit();
-            return [
+            return $ledger['status'] = [
                 'status' => 'success',
-                'code' => '200'
+                'code' => '200',
+                'message' => 'Successfully Saved Ledger Purchases'
             ];
         } catch (\Exception $ex) {
             app('db')->rollback();
-            return [
+            return $ledger['status'] = [
                 'status' => $ex->getMessage(),
-                'code' => '422'
+                'code' => '422',
+                'message' => $ex->getMessage()
             ];
         }
     }

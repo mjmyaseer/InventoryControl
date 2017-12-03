@@ -64,6 +64,7 @@ class SupplierRepo implements SupplierInterface
             if ($supplier->save()) {
                 $suppliers['status'] = response()->json([
                     'status' => 'SUCCESS',
+                    'code' => 200,
                     'message' => Config::get('custom_messages.NEW_SUPPLIER_ADDED')
                 ], 200);
 
@@ -75,8 +76,10 @@ class SupplierRepo implements SupplierInterface
 
             return $suppliers['status'] = response()->json([
                 'status' => 'FAILED',
-                'error' => Config::get('custom_messages.ERROR_WHILE_SUPPLIER_ADDING')
-            ], 200);
+                'code' => 422,
+                'error' => Config::get('custom_messages.ERROR_WHILE_SUPPLIER_ADDING'),
+                'message' => $e->getMessage()
+            ], 420);
         }
     }
 

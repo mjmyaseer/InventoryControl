@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use \Config;
 use \Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -36,7 +37,6 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -61,7 +61,6 @@ class LoginController extends Controller
 
         }
 
-
         $user = new User();
 
         $existingUser = $user->getUserByEmail($request->email);
@@ -80,6 +79,12 @@ class LoginController extends Controller
             ];
         }
 
+        $request->session()->put('userFirstName', $existingUser->first_name);
+        $request->session()->put('userLastName', $existingUser->last_name);
+        $request->session()->put('userID', $existingUser->id);
+        $request->session()->put('email', $existingUser->email);
+        $request->session()->put('role', $existingUser->role);
+
         $auth_token = new AuthToken();
         $auth_token->user_id = $existingUser->id;
         $auth_token->token = md5(time());
@@ -97,5 +102,12 @@ class LoginController extends Controller
             'status' => 'SUCCESS',
             'user' => $existingUser
         ]);
+    }
+
+    public function doLogout(Request $request)
+    {
+        $request->session()->flush();
+
+        return Redirect::to('sign-in.html');
     }
 }

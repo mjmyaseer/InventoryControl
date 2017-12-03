@@ -49,6 +49,7 @@ class PurchaseController extends Controller
         $this->ledger = $ledger;
         $this->transaction = $transaction;
         $this->purchaseReturns = $purchaseReturns;
+
     }
 
     public function index()
@@ -68,8 +69,14 @@ class PurchaseController extends Controller
 
     }
 
-    public function addPurchase()
+    public function addPurchase(Request $request)
     {
+        $userRole = $request->session()->get('role');
+
+        if ($userRole == 2) {
+            return redirect('secure/dashboard');
+        }
+
         $categories = $this->category->index();
         $items = $this->item->index();
         $suppliers = $this->supplier->index();
@@ -85,6 +92,17 @@ class PurchaseController extends Controller
 
     public function savePurchase(Request $request)
     {
+//        dd($request->all());
+//        $validationRules = [
+//            'supplier_id' => 'required',
+//            'category' => 'required',
+//            'item' => 'required',
+//            'quantity' => 'required',
+//            'order_date' => 'required',
+//        ];
+//
+//        $this->validate($request, $validationRules);
+
         $data = $request->all();
 
         $insert = $this->purchase->savePurchases($data);
@@ -102,6 +120,6 @@ class PurchaseController extends Controller
 
         $grn = $this->purchase->index();
 
-        return Redirect::to('secure/purchase.html')->with('purchase', $grn);
+        return Redirect::to('secure/purchase')->with('purchase', $grn);
     }
 }

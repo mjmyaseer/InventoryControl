@@ -86,14 +86,16 @@ class SalesReturnRepo implements SalesReturnInterface
             }
 
             app('db')->commit();
-            return [
+            return $salesReturn['status'] = [
                 'status' => 'success',
+                'message' => 'Successfully Saved Sales Returns',
                 'code' => '200'
             ];
         } catch (\Exception $ex) {
             app('db')->rollback();
-            return [
+            return $salesReturn['status'] = [
                 'status' => $ex->getMessage(),
+                'message' => $ex->getMessage(),
                 'code' => '422'
             ];
         }

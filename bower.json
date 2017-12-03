@@ -1,12 +1,12 @@
 {
-  "name": "mvc.apache.loc",
+  "name": "InventoryControl",
   "description": "",
   "main": "index.js",
   "authors": [
-    "piusha <piushakalyana@gmail.com>"
+    "Yaseer <mjmyaseer@gmail.com>"
   ],
-  "license": "MIT",
-  "homepage": "https://github.com/Piusha/esoft",
+  "license": "Yaseer",
+  "homepage": "https://github.com/yaseer/esoft",
   "ignore": [
     "**/.*",
     "node_modules",

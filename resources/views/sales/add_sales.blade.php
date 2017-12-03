@@ -8,6 +8,15 @@
         <div class="col-md-12">
             <div class="content-box-large">
                 <div class="panel-heading">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="panel-title">Sales</div>
 
                     <div class="panel-options">
@@ -26,7 +35,7 @@
                                 <select style="width: 250px" class="form-control" name="customer_id">
                                     <option value="0" selected disabled>Select Customer</option>
                                     @foreach($data['customers'] as $items)
-                                        <option value="{{$items->id}}">{{$items->customer_name}}</option>
+                                        <option value="{{$items->customer_id}}">{{$items->customer_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -39,7 +48,7 @@
                                             name="order[1][category]">
                                         <option value="0" selected disabled>Select a Category</option>
                                         @foreach($data['categories'] as $items)
-                                            <option value="{{$items->id}}">{{$items->title}}</option>
+                                            <option value="{{$items->category_id}}">{{$items->category_title}}</option>
                                         @endforeach
                                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -48,7 +57,7 @@
                                             name="order[1][item]">
                                         <option value="0" selected disabled>Select an Item</option>
                                         @foreach($data['items'] as $items)
-                                            <option value="{{$items->id}}">{{$items->title}}</option>
+                                            <option value="{{$items->item_id}}">{{$items->item_title}}</option>
                                         @endforeach
                                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -124,7 +133,7 @@
                         '  <select class="form-control" style="width: 200px" type="text" name="order[' + (selectid) + '][category]">' +
                         '  <option value="0" selected disabled>Select a Category</option>' +
                         '  @foreach($data["categories"] as $items)' +
-                        '  <option value="{{$items->id}}">{{$items->title}}</option>' +
+                        '  <option value="{{$items->category_id}}">{{$items->category_title}}</option>' +
                         '  @endforeach' +
                         '  </select>&nbsp;&nbsp;&nbsp;&nbsp;' +
 
@@ -132,7 +141,7 @@
                         ' <select class="form-control" style="width: 200px" type="text" name="order[' + (selectid) + '][item]">' +
                         '  <option value="0" selected disabled>Select an </option>' +
                         '  @foreach($data["items"] as $items)' +
-                        '  <option value="{{$items->id}}">{{$items->title}}</option>' +
+                        '  <option value="{{$items->item_id}}">{{$items->item_title}}</option>' +
                         '  @endforeach' +
                         ' </select>&nbsp;&nbsp;&nbsp;&nbsp;' +
 

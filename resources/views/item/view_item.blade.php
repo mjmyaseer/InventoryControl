@@ -27,7 +27,6 @@
                             <th>Title</th>
                             <th>Unit Price</th>
                             <th>Reorder Level</th>
-                            <th>Quantity</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,7 +39,6 @@
                                 <td>{{$item->title}}</td>
                                 <td>{{$item->unit_price}}</td>
                                 <td class="center"> {{$item->reorder_level}}</td>
-                                <td class="center">{{$item->quantity}}</td>
                             </tr>
                         @endforeach
 

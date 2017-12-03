@@ -80,10 +80,11 @@ class ItemRepo implements ItemInterface
             $item->status = Item::ACTIVE;
 
             if ($item->save()) {
-                $item['status'] = response()->json([
+                $item['status'] = [
                     'status' => 'SUCCESS',
+                    'code' => 200,
                     'message' => Config::get('custom_messages.NEW_ITEM_ADDED')
-                ], 200);
+                ];
 
                 $item['result'] = Item::all();
                 return $item;
@@ -91,10 +92,12 @@ class ItemRepo implements ItemInterface
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return $item['status'] = response()->json([
+            return $item['status'] = [
                 'status' => 'FAILED',
-                'error' => Config::get('custom_messages.ERROR_WHILE_ITEM_ADDING')
-            ], 200);
+                'code' => 422,
+                'error' => Config::get('custom_messages.ERROR_WHILE_ITEM_ADDING'),
+                'message' => $e->getMessage()
+            ];
         }
     }
 

@@ -64,10 +64,11 @@ class CustomerRepo implements CustomerInterface
             $customer->customer_address = $request->customer_address;
 
             if ($customer->save()) {
-                $customer['status'] = response()->json([
+                $customer['status'] = [
                     'status' => 'SUCCESS',
+                    'code' => 200,
                     'message' => Config::get('custom_messages.NEW_CUSTOMER_ADDED')
-                ], 200);
+                ];
 
                 $customer['result'] = Customer::all();;
                 return $customer;
@@ -75,10 +76,12 @@ class CustomerRepo implements CustomerInterface
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return $customer['status'] = response()->json([
+            return $customer['status'] = [
                 'status' => 'FAILED',
-                'error' => Config::get('custom_messages.ERROR_WHILE_CUSTOMER_ADDING')
-            ], 200);
+                'code' => 422,
+                'error' => Config::get('custom_messages.ERROR_WHILE_CUSTOMER_ADDING'),
+                'message' => $e->getMessage()
+            ];
         }
     }
 }

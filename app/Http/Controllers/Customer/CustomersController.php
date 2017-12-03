@@ -29,10 +29,14 @@ class CustomersController extends Controller
 
     public function addCustomer($id = null)
     {
+        if (!$id == null) {
+            $customers = $this->customer->index($id);
 
-        $customers = $this->customer->index($id);
+            return view('customer.add_customers')->with('customers', $customers);
+        }else{
+            return view('customer.add_customers');
+        }
 
-        return view('customer.add_customers')->with('customers', $customers);
     }
 
     public function saveCustomer($id = null, Request $request)
@@ -46,9 +50,9 @@ class CustomersController extends Controller
         ];
         if (!isset($id)) {
 
-            $validationRules['customer_code'] = 'required|unique:' . Customer::TABLE . ',title';
-            $validationRules['customer_email'] = 'required|unique:' . Customer::TABLE . ',title';
-            $validationRules['customer_telephone'] = 'required|unique:' . Customer::TABLE . ',title';
+            $validationRules['customer_code'] = 'required|unique:' . Customer::TABLE . ',customer_code';
+            $validationRules['customer_email'] = 'required|unique:' . Customer::TABLE . ',customer_email';
+            $validationRules['customer_telephone'] = 'required|unique:' . Customer::TABLE . ',customer_telephone';
         }
         $this->validate($request, $validationRules);
 

@@ -8,6 +8,11 @@
         <div class="col-md-12">
             <div class="content-box-large">
                 <div class="panel-heading">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <div class="panel-title">Reports</div>
 
 

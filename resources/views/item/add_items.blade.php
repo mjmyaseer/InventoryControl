@@ -8,6 +8,15 @@
         <div class="col-md-12">
             <div class="content-box-large">
                 <div class="panel-heading">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="panel-title">Items</div>
 
                     <div class="panel-options">
@@ -116,9 +125,9 @@
                                 <label>Supplier Name</label>
                                 <select class="form-control" name="supplier_id">
                                     @foreach($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}"
+                                        <option value="{{$supplier->supplier_id}}"
                                                 @php
-                                                    if (isset($item) && $item[0]->item_supplier_id == $supplier->id)
+                                                    if (isset($item) && $item[0]->item_supplier_id == $supplier->supplier_id)
                                                     {
                                                     echo 'selected';
                                                     }

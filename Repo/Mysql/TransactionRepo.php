@@ -103,14 +103,16 @@ class TransactionRepo implements TransactionInterface
             }
 
             app('db')->commit();
-            return [
+            return $transaction['status'] = [
                 'status' => 'success',
+                'message' => 'Successfully Saved Transaction',
                 'code' => '200'
             ];
         } catch (\Exception $ex) {
             app('db')->rollback();
-            return [
+            return $transaction['status'] = [
                 'status' => $ex->getMessage(),
+                'message' => $ex->getMessage(),
                 'code' => '422'
             ];
         }

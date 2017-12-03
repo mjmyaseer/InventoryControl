@@ -7,6 +7,7 @@ use App\Http\Models\Category;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use \Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,13 +32,18 @@ class CategoriesController extends Controller
 
     public function addCategory($id = null)
     {
-        $categories = $this->category->index($id);
-//        dd($categories);
-        return view('category.add_categories')->with('categories', $categories);
+        if (!$id == null) {
+            $categories = $this->category->index($id);
+
+            return view('category.add_categories')->with('categories', $categories);
+        } else {
+            return view('category.add_categories');
+        }
     }
 
     public function saveCategory($id = null, Request $request)
     {
+
         $validationRules = [
             'title' => 'required',
             'description' => 'required'
@@ -46,19 +52,28 @@ class CategoriesController extends Controller
 
             $validationRules['title'] = 'required|unique:' . Category::TABLE . ',title';
         }
+
         $this->validate($request, $validationRules);
 
         if (!$request->has('title')) {
             return response()->json([
                 'status' => 'FAILED',
-                'error' =>Config::get('custom_messages.CAT_TITLE_REQUIRED')
+                'error' => Config::get('custom_messages.CAT_TITLE_REQUIRED')
             ], 200);
         }
 
-       $categories = $this->category->saveCategory($id,$request);
-        $categories = $categories['result'];
+        $categoriesStatus = $this->category->saveCategory($id, $request);
 
-        return Redirect::to('secure/categories')->with('categories', $categories);
+        $categories = $categoriesStatus['result'];
+
+        if ($categoriesStatus['status']['code'] == 200) {
+            flash()->success($categoriesStatus['status']['message']);
+            return Redirect::to('secure/categories')->with('categories', $categories);
+
+        } elseif ($categoriesStatus['status']['code'] == 422) {
+            flash()->error($categoriesStatus['status']['message']);
+        }
+
     }
 
 
