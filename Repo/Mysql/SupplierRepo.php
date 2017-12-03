@@ -49,6 +49,7 @@ class SupplierRepo implements SupplierInterface
 
     public function saveSupplier($id = null,$request)
     {
+
         try {
             if($id != null){
                 $supplier = $this->supplier->where('id', $id)->first();
@@ -62,11 +63,11 @@ class SupplierRepo implements SupplierInterface
             $supplier->supplier_address = $request->supplier_address;
 
             if ($supplier->save()) {
-                $suppliers['status'] = response()->json([
+                $suppliers['status'] = [
                     'status' => 'SUCCESS',
                     'code' => 200,
                     'message' => Config::get('custom_messages.NEW_SUPPLIER_ADDED')
-                ], 200);
+                ];
 
                 $suppliers['result'] = $supplier::all();
                 return $suppliers;
@@ -74,12 +75,12 @@ class SupplierRepo implements SupplierInterface
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return $suppliers['status'] = response()->json([
+            return $suppliers['status'] =[
                 'status' => 'FAILED',
                 'code' => 422,
                 'error' => Config::get('custom_messages.ERROR_WHILE_SUPPLIER_ADDING'),
-                'message' => $e->getMessage()
-            ], 420);
+                'msg' => $e->getMessage()
+            ];
         }
     }
 

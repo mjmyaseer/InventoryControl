@@ -43,33 +43,30 @@ class SuppliersController extends Controller
     public function saveSupplier($id = null,Request $request)
     {
         $validationRules = [
-            'item_id' => 'required',
             'supplier_code' => 'required',
             'supplier_name' => 'required',
             'supplier_email' => 'required',
             'supplier_telephone' => 'required',
             'supplier_address' => 'required',
-            'customer_address' => 'required'
         ];
         if (!isset($id)) {
 
-            $validationRules['supplier_code'] = 'required|unique:' . Supplier::TABLE . ',title';
-            $validationRules['supplier_email'] = 'required|unique:' . Supplier::TABLE . ',title';
-            $validationRules['supplier_telephone'] = 'required|unique:' . Supplier::TABLE . ',title';
+            $validationRules['supplier_code'] = 'required|unique:' . Supplier::TABLE . ',supplier_code';
+            $validationRules['supplier_email'] = 'required|unique:' . Supplier::TABLE . ',supplier_email';
+            $validationRules['supplier_telephone'] = 'required|unique:' . Supplier::TABLE . ',supplier_telephone';
         }
         $this->validate($request, $validationRules);
 
+        $suppliersStatus = $this->supplier->saveSupplier($id,$request);
+        $suppliers = $suppliersStatus['result'];
 
-        if (!$request->has('supplier_code')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.SUPPLIER_CODE_REQUIRED')
-            ], 200);
+        if ($suppliersStatus['status']['code'] == 200) {
+            flash()->success($suppliersStatus['status']['message']);
+            return Redirect::to('secure/suppliers')->with('suppliers', $suppliers);
+
+        } elseif ($suppliersStatus['status']['code'] == 422) {
+            flash()->error($suppliersStatus['status']['message']);
         }
 
-        $suppliers = $this->supplier->saveSupplier($id,$request);
-        $suppliers = $suppliers['result'];
-
-        return Redirect::to('secure/suppliers')->with('suppliers', $suppliers);
     }
 }

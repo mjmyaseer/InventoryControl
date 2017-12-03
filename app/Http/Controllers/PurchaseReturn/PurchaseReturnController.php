@@ -58,15 +58,23 @@ class PurchaseReturnController extends Controller
 
         $transaction = $this->transaction->saveTransactions($data);
 
+        $purchaseReturns = $this->purchaseReturns->getPurchaseReturns();
 
-        if ($purchaseReturn['code'] == 422 || $ledger['code'] == 422 || $transaction['code'] == 422 || $purchaseReturnStatus['code'] == 422) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CREATE_ERROR')
-            ], 422);
+        if ($purchaseReturn['code'] == 200 && $ledger['code'] == 200 &&
+            $transaction['code'] == 200 && $purchaseReturnStatus['code'] == 200) {
+            flash()->success($purchaseReturn['message']);
+            flash()->success($ledger['message']);
+            flash()->success($transaction['message']);
+            flash()->success($purchaseReturnStatus['message']);
+            return Redirect::to('secure/purchaseReturns')->with('purchaseReturns', $purchaseReturns);
+
+        } elseif ($purchaseReturn['code'] == 422 || $ledger['code'] == 422 ||
+            $transaction['code'] == 422 || $purchaseReturnStatus['code'] == 422) {
+            flash()->error($purchaseReturn['message']);
+            flash()->error($ledger['message']);
+            flash()->error($transaction['message']);
+            flash()->error($purchaseReturnStatus['message']);
         }
 
-        $purchaseReturns = $this->purchaseReturns->getPurchaseReturns();
-        return Redirect::to('secure/purchaseReturns.html')->with('purchaseReturns', $purchaseReturns);
     }
 }

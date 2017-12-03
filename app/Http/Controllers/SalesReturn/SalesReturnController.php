@@ -5,7 +5,9 @@
  * Date: 11/17/2017
  * Time: 1:11 AM
  */
+
 namespace App\Http\Controllers\SalesReturn;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -49,21 +51,38 @@ class SalesReturnController extends Controller
 
         $salesReturn = $this->salesReturn->saveSalesReturn($data);
 
-        $salesReturnStatus = $this->sales->salesReturnStatus($id);
+        if ($salesReturn) {
+            $salesReturnStatus = $this->sales->salesReturnStatus($id);
+        }
 
-        $ledger = $this->ledger->saveLedgerSales($data);
+        if ($salesReturn && $salesReturnStatus) {
+            $ledger = $this->ledger->saveLedgerSales($data);
+        }
 
-        $transaction = $this->transaction->saveTransactions($data);
-
-        if ($salesReturn['code'] == 422 || $ledger['code'] == 422 || $transaction['code'] == 422 || $salesReturnStatus['code'] == 422) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CREATE_ERROR')
-            ], 422);
+        if ($salesReturn && $salesReturnStatus && $ledger) {
+            $transaction = $this->transaction->saveTransactions($data);
         }
 
         $salesReturns = $this->salesReturn->getSalesReturns();
-        return Redirect::to('secure/salesReturns.html')->with('salesReturns', $salesReturns);
+
+        if ($salesReturn['code'] == 200 && $ledger['code'] == 200 &&
+            $transaction['code'] == 200 && $salesReturnStatus['code'] == 200) {
+            flash()->success($salesReturn['message']);
+            flash()->success($ledger['message']);
+            flash()->success($transaction['message']);
+            flash()->success($salesReturnStatus['message']);
+
+            return Redirect::to('secure/salesReturns')->with('salesReturns', $salesReturns);
+
+        } elseif ($salesReturn['code'] == 422 || $ledger['code'] == 422 ||
+            $transaction['code'] == 422 || $salesReturnStatus['code'] == 422) {
+
+            flash()->error($salesReturn['status']['message']);
+            flash()->error($ledger['status']['message']);
+            flash()->error($transaction['status']['message']);
+            flash()->error($salesReturnStatus['status']['message']);
+        }
+
     }
 
 }

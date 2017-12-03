@@ -44,23 +44,23 @@ class ItemsController extends Controller
 
     public function addItem($id = null)
     {
-        if(isset($id) && $id != null){
+        if (isset($id) && $id != null) {
 
             $item = $this->item->index($id);
 //            dd($item);
             $categories = $this->category->index();
             $suppliers = $this->supplier->index();
             $data = array(
-                'item'=> $item,
-                'categories'  => $categories,
-                'suppliers'   => $suppliers
+                'item' => $item,
+                'categories' => $categories,
+                'suppliers' => $suppliers
             );
-        }else{
+        } else {
             $categories = $this->category->index();
             $suppliers = $this->supplier->index();
             $data = array(
-                'categories'  => $categories,
-                'suppliers'   => $suppliers
+                'categories' => $categories,
+                'suppliers' => $suppliers
             );
         }
 
@@ -92,18 +92,16 @@ class ItemsController extends Controller
             $validationRules['title'] = 'required|unique:' . Item::TABLE . ',title';
         }
 
-        $this->validate($request, $validationRules);
-        if (!$request->has('title')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.ITEM_TITLE_REQUIRED')
-            ], 200);
+        $itemsStatus = $this->item->saveItem($id, $request);
+        $items = $itemsStatus['result'];
+
+        if ($itemsStatus['status']['code'] == 200) {
+            flash()->success($itemsStatus['status']['message']);
+            return Redirect::to('secure/items')->with('items', $items);
+
+        } elseif ($itemsStatus['status']['code'] == 422) {
+            flash()->error($itemsStatus['status']['message']);
         }
-
-        $items = $this->item->saveItem($id,$request);
-        $items = $items['result'];
-
-        return Redirect::to('secure/items')->with('items', $items);
     }
 
     public function relation()

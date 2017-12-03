@@ -56,16 +56,16 @@ class CustomersController extends Controller
         }
         $this->validate($request, $validationRules);
 
-        if (!$request->has('customer_code')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CUSTOMER_CODE_REQUIRED')
-            ], 200);
+        $customersStatus = $this->customer->saveCustomer($id, $request);
+        $customers = $customersStatus['result'];
+
+        if ($customersStatus['status']['code'] == 200) {
+            flash()->success($customersStatus['status']['message']);
+            return Redirect::to('secure/customers')->with('customers', $customers);
+
+        } elseif ($customersStatus['status']['code'] == 422) {
+            flash()->error($customersStatus['status']['message']);
         }
 
-        $customers = $this->customer->saveCustomer($id, $request);
-        $customers = $customers['result'];
-
-        return Redirect::to('secure/customers')->with('customers', $customers);
     }
 }

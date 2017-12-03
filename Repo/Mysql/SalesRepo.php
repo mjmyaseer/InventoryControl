@@ -110,7 +110,7 @@ class SalesRepo implements SalesInterface
 
             app('db')->commit();
 
-            return [
+            return $sales['status'] = [
                 'status' => 'success',
                 'message' => 'Successfully Saved Sales Returns',
                 'code' => '200'
@@ -121,7 +121,7 @@ class SalesRepo implements SalesInterface
 
             app('db')->rollback();
 
-            return [
+            return $sales['status'] =  [
                 'status' => $ex->getMessage(),
                 'message' => $ex->getMessage(),
                 'code' => '422'

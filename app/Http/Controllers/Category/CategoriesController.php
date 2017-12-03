@@ -55,13 +55,6 @@ class CategoriesController extends Controller
 
         $this->validate($request, $validationRules);
 
-        if (!$request->has('title')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CAT_TITLE_REQUIRED')
-            ], 200);
-        }
-
         $categoriesStatus = $this->category->saveCategory($id, $request);
 
         $categories = $categoriesStatus['result'];

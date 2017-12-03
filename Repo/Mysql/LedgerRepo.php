@@ -130,7 +130,7 @@ class LedgerRepo implements ledgerInterface
             app('db')->commit();
             return $ledger['status'] = [
                 'status' => 'success',
-                'message' => 'successfully saved',
+                'message' => 'Successfully Saved Ledger',
                 'code' => '200'
             ];
         } catch (\Exception $ex) {

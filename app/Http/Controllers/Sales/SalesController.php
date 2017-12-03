@@ -35,7 +35,7 @@ class SalesController extends Controller
                                 CustomerInterface $customer,
                                 SalesInterface $sales,
                                 LedgerInterface $ledger,
-    TransactionInterface $transaction
+                                TransactionInterface $transaction
     )
     {
         $this->category = $category;
@@ -73,25 +73,38 @@ class SalesController extends Controller
         return view('sales.add_sales')->with('data', $data);
     }
 
-    public function saveSales($id = null,Request $request)
+    public function saveSales($id = null, Request $request)
     {
         $data = $request->all();
 
-        $sales = $this->sales->saveSales($id, $data);
+        $salesStatus = $this->sales->saveSales($id, $data);
 
-        $ledger = $this->ledger->saveLedgerSales($data);
+        if ($salesStatus) {
+            $ledger = $this->ledger->saveLedgerSales($data);
+        }
 
-        $transaction = $this->transaction->saveTransactions($data);
-
-        if ($sales['code'] == 422 || $ledger['code'] == 422 || $transaction['code'] == 422) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CREATE_ERROR')
-            ], 422);
+        if ($salesStatus && $salesStatus) {
+            $transaction = $this->transaction->saveTransactions($data);
         }
 
         $sales = $this->sales->index();
 
-        return Redirect::to('secure/sales')->with('sales', $sales);
+        if ($salesStatus['code'] == 200 &&
+            $ledger['code'] == 200 &&
+            $transaction['code'] == 200)
+        {
+            flash()->success($salesStatus['message']);
+            flash()->success($ledger['message']);
+            flash()->success($transaction['message']);
+            return Redirect::to('secure/sales')->with('sales', $sales);
+
+        } elseif ($salesStatus['code'] == 422 ||
+            $ledger['code'] == 422 ||
+            $transaction['code'] == 422)
+        {
+            flash()->error($salesStatus['message']);
+            flash()->error($ledger['message']);
+            flash()->error($transaction['message']);
+        }
     }
 }

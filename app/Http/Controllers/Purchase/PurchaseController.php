@@ -107,19 +107,26 @@ class PurchaseController extends Controller
 
         $insert = $this->purchase->savePurchases($data);
 
-        $ledger = $this->ledger->saveLedgerPurchases($data);
+        if ($insert) {
+            $ledger = $this->ledger->saveLedgerPurchases($data);
+        }
 
-        $transaction = $this->transaction->saveTransactions($data);
-
-        if ($insert['code'] == 422 || $ledger['code'] == 422 || $transaction['code'] == 422) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.CREATE_ERROR')
-            ], 422);
+        if ($insert && $ledger) {
+            $transaction = $this->transaction->saveTransactions($data);
         }
 
         $grn = $this->purchase->index();
+        if ($insert['code'] == 200 && $ledger['code'] == 200 && $transaction['code'] == 200) {
+            flash()->success($insert['message']);
+            flash()->success($ledger['message']);
+            flash()->success($transaction['message']);
+            return Redirect::to('secure/purchase')->with('purchase', $grn);
 
-        return Redirect::to('secure/purchase')->with('purchase', $grn);
+        } elseif ($insert['code'] == 422) {
+            flash()->error($insert['message']);
+            flash()->error($ledger['message']);
+            flash()->error($ledger['message']);
+        }
+
     }
 }
