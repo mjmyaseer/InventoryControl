@@ -36,16 +36,20 @@
                                        placeholder="Item Title"
                                        type="text"
                                        name="title"
+                                       id="title"
                                        value="@php
                                            if (isset($item[0]->item_title))
                                    {
                                    echo $item[0]->item_title;
                                    }
                                        @endphp"/>
+                                <span id="title_sp" class="error"></span>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea style="width: 400px; height: 100px" class="form-control"
+                                <textarea style="width: 400px; height: 100px"
+                                          id="description"
+                                          class="form-control"
                                           placeholder="Description"
                                           name="description" row="3">@php
                                         if (isset($item[0]->item_description))
@@ -53,9 +57,10 @@
                                 echo $item[0]->item_description;
                                 }
                                     @endphp</textarea>
+                                <span id="desc_sp" class="error"></span>
                             </div>
                             <div class="form-group">
-                                <label>Category Id</label>
+                                <label>Category Name</label>
                                 <select class="form-control" name="category_id">
                                     @foreach($categories as $category)
                                         <option value="{{$category->category_id}}"
@@ -75,6 +80,7 @@
                                 <input class="form-control"
                                        placeholder="Unit Price"
                                        type="text"
+                                       id="unit_price"
                                        name="unit_price"
                                        value="@php
                                            if (isset($item[0]->item_unit_price))
@@ -83,12 +89,14 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="unitp_sp" class="error"></span>
                             </div>
                             <div class="form-group">
                                 <label>Max Retail Price</label>
                                 <input class="form-control"
                                        placeholder="Max retail price"
                                        type="text"
+                                       id="max_retail_price"
                                        name="max_retail_price"
                                        value="@php
                                            if (isset($item[0]->item_max_retail_price))
@@ -97,6 +105,7 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="maxret_sp" class="error"></span>
                             </div>
                             {{--<div class="form-group">--}}
                             {{--<label>Quantity</label>--}}
@@ -111,6 +120,7 @@
                                 <input class="form-control"
                                        placeholder="Reorder level"
                                        type="number"
+                                       id="reorder_level"
                                        name="reorder_level"
                                        value="@php
                                            if (isset($item[0]->item_reorder_level))
@@ -119,6 +129,7 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="reorder_sp" class="error"></span>
                             </div>
                             <div class="form-group">
                                 <label>Supplier Name</label>
@@ -137,7 +148,7 @@
                             </div>
                         </fieldset>
                         <div>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" id="submit" type="submit">
                                 <i class="fa fa-save"></i>
                                 Submit
                             </button>

@@ -27,7 +27,7 @@ class SalesRepo implements SalesInterface
     public function index($keyword = null)
     {
         $query = DB::table(Sales::TABLE)
-            ->select(Sales::TABLE . '.*', Item::TABLE . '.*', Customer::TABLE . '.*', Sales::TABLE . '.quantity as total',
+            ->select(Sales::TABLE . '.*', Item::TABLE . '.*', Customer::TABLE . '.*', Sales::TABLE . '.quantity as quantity',
                 Customer::TABLE . '.id as customer_id', Sales::TABLE . '.id as id', Item::TABLE . '.id as item_id',
                 Sales::TABLE . '.created_at as created_at', Sales::TABLE . '.updated_at as updated_at',
                 Sales::TABLE . '.status as status', Sales::TABLE . '.quantity as sales_quantity',

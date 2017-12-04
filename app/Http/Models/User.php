@@ -7,7 +7,7 @@ use \Exception;
 use \Log;
 class User extends Model
 {
-    protected $table ="users";
+    protected $table ='users';
     const TABLE = 'users';
 
     /**

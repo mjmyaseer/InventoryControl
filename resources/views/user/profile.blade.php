@@ -34,6 +34,7 @@
                                 <input class="form-control"
                                        placeholder="First Name"
                                        type="text"
+                                       id="first_name"
                                        name="first_name"
                                        value="@php
                                            if(isset($user['first_name']))
@@ -41,9 +42,8 @@
                                            echo $user['first_name'];
                                            }
                                        @endphp"
-                                       id="title"
                                 />
-                                <span id="ons" class="error"></span>
+                                <span id="fname" class="error"></span>
                             </div>
 
                             <div class="form-group">
@@ -51,6 +51,7 @@
                                 <input class="form-control"
                                        placeholder="Last Name"
                                        type="text"
+                                       id="last_name"
                                        name="last_name"
                                        value="@php
                                            if(isset($user['last_name']))
@@ -58,9 +59,8 @@
                                            echo $user['last_name'];
                                            }
                                        @endphp"
-                                       id="title"
                                 />
-                                <span id="ons" class="error"></span>
+                                <span id="lname" class="error"></span>
                             </div>
 
                             <div class="form-group">
@@ -68,6 +68,7 @@
                                 <input class="form-control"
                                        placeholder="Email"
                                        type="text"
+                                       id="email"
                                        name="email"
                                        value="@php
                                            if(isset($user['email']))
@@ -75,9 +76,8 @@
                                            echo $user['email'];
                                            }
                                        @endphp"
-                                       id="title"
                                 />
-                                <span id="ons" class="error"></span>
+                                <span id="mail" class="error"></span>
                             </div>
 
                             <div class="form-group">
@@ -91,7 +91,7 @@
                                 <select class="form-control" name="role">
                                     <option id="role" value="1"
                                             @php
-                                                if ($user['role'] == 1)
+                                                if (isset($user) && $user['role'] == 1)
                                                 {
                                                 echo 'selected';
                                                 }else{
@@ -102,7 +102,7 @@
                                     </option>
                                     <option id="role" value="2" name="role"
                                             @php
-                                        if ($user['role'] == 2)
+                                        if (isset($user) && $user['role'] == 2)
                                         {
                                         echo 'selected';
                                         }else{
@@ -135,6 +135,6 @@
 @endsection
 
 @section('js')
-    <script src="../js/app/categories.js"></script>
+    <script src="../js/app/users.js"></script>
 
 @endsection

@@ -49,7 +49,7 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea style="width: 25%; height: 100px" id="description" class="form-control"
-                                          placeholder="description"
+                                          placeholder="Description"
                                           name="description" row="3">@php
                                         if(isset($categories[0]->category_description))
                                         {

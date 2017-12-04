@@ -15,7 +15,9 @@
                     </div>
                 </div>
                 <div class="panel-body">
-
+<?php
+//                        print_r($sales);exit();
+                        ?>
                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
                            id="example">
                         <thead>
@@ -113,7 +115,7 @@
                                                     <div class="form-group">
                                                         <label>Quantity</label>
                                                         <input class="form-control"
-                                                               value="{{$category->total}}"
+                                                               value="{{$category->quantity}}"
                                                                type="text"
                                                                name="quantity" readonly/>
                                                     </div>

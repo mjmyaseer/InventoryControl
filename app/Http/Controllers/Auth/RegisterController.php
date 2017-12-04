@@ -77,6 +77,23 @@ class RegisterController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function index(Request $request)
+    {
+        $userRole = $request->session()->get('role');
+
+        if ($userRole != 1) {
+            flash()->error('You are not Authorized');
+            return redirect('secure/dashboard.html');
+        }
+
+        $users = User::all();
+        return view('user.index')->with('users', $users);
+    }
+
     public function newUser(Request $request)
     {
 
@@ -109,6 +126,7 @@ class RegisterController extends Controller
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->role = $request->role;
+            $user->created_by = $request->session()->get('userID');
 
             if ($user->save()) {
                 $auth_token = new AuthToken();
@@ -125,99 +143,27 @@ class RegisterController extends Controller
                 unset($user->email);
                 unset($user->role);
 
-                return response()->json([
-                    'status' => 'SUCCESS',
-                    'user' => $user
-                ]);
+                $users = User::all();
 
+                flash()->success('User Created Successfully');
+
+                return view('user.index')->with('users', $users);
             }
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.NEW_USER_CREATE_ERROR')
-            ]);
+            flash()->error('Error Creating User');
+
         } catch (Exception $e) {
             Log::error($e->getMessage());
 
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => $e->getMessage()
-            ]);
+            flash()->error($e->getMessage());
         }
         $this->redirectTo;
     }
+
+
 
     public function signUp()
     {
         return view('user.sign-up');
     }
 
-    public function updateUser($id = null , Request $request)
-    {
-        $userRole = $request->session()->get('role');
-
-        if ($userRole != 1) {
-            flash()->error('You are not Authorized');
-            return redirect('secure/dashboard.html');
-        }
-
-        if ($id == null || $id == '') {
-            $id = $request->session()->get('userID');
-        }
-
-        $user = User::where("id",$id)->first();
-
-        $data = array(
-            'id' => $user->id,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'email' => $user->email,
-            'role' => $user->role);
-
-        return view('user.profile')->with('user',$data);
-
-    }
-
-    public function editUser(Request $request)
-    {
-        $userRole = $request->session()->get('role');
-
-        if ($userRole != 1) {
-            flash()->error('You are not Authorized');
-            return redirect('secure/dashboard.html');
-        }
-
-        $id = $request->session()->get('userID');
-
-        $user = User::where("id",$id)->first();
-//        dd($user);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->save();
-
-        if(isset($request->password)&& !empty($request->password))
-        {
-            $user->password = $request->password;
-        }else{
-            $user->password = $user->password;
-        }
-        $user->created_by = $request->session()->get('userID');
-
-
-        return Redirect::to('secure/dashboard.html');
-
-    }
-
-    public function index(Request $request)
-    {
-        $userRole = $request->session()->get('role');
-
-        if ($userRole != 1) {
-            flash()->error('You are not Authorized');
-            return redirect('secure/dashboard.html');
-        }
-
-        $users = User::all();
-        return view('user.index')->with('users', $users);
-    }
 }

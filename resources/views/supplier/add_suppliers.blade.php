@@ -34,6 +34,7 @@
                                 <label>Supplier Code</label>
                                 <input class="form-control"
                                        placeholder="Supplier Code"
+                                       id="supplier_code"
                                        type="text"
                                        name="supplier_code"
                                        value="@php
@@ -43,6 +44,7 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="supp_code" class="error"></span>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div>
                             <div class="form-group">
@@ -50,6 +52,7 @@
                                 <input class="form-control"
                                        placeholder="Supplier Name"
                                        type="text"
+                                       id="supplier_name"
                                        name="supplier_name"
                                        value="@php
                                            if (isset($suppliers[0]->supplier_name))
@@ -58,6 +61,7 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="supp_name" class="error"></span>
                             </div>
 
                             <div class="form-group">
@@ -66,6 +70,7 @@
                                        placeholder="Telephone"
                                        type="text"
                                        name="supplier_telephone"
+                                       id="supplier_telephone"
                                        value="@php
                                            if (isset($suppliers[0]->supplier_telephone))
                                    {
@@ -73,12 +78,14 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="sup_phone" class="error"></span>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input class="form-control"
                                        placeholder="Email"
                                        type="text"
+                                       id="supplier_email"
                                        name="supplier_email"
                                        value="@php
                                            if (isset($suppliers[0]->supplier_email))
@@ -87,12 +94,14 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="email" class="error"></span>
                             </div>
                             <div class="form-group">
                                 <label>Address</label>
                                 <input class="form-control"
                                        placeholder="Address"
                                        type="text"
+                                       id="supplier_address"
                                        name="supplier_address"
                                        value="@php
                                            if (isset($suppliers[0]->supplier_address))
@@ -101,10 +110,11 @@
                                    }
                                        @endphp"
                                 />
+                                <span id="address" class="error"></span>
                             </div>
                         </fieldset>
                         <div>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" type="submit" id="submit">
                                 <i class="fa fa-save"></i>
                                 Submit
                             </button>
@@ -120,6 +130,6 @@
 @endsection
 
 @section('js')
-    <script src="/js/app/suppliers.js"></script>
+    <script src="../js/app/suppliers.js"></script>
 
 @endsection

@@ -30,11 +30,13 @@
                             <option value="3">Sales Returns</option>
                             <option value="4">Purchase Returns</option>
                         </select>&nbsp;&nbsp;
+                        <span id="cate" class="error"></span>
 
                         <label>Start Date</label>&nbsp;
                         <div style="width: 200px" class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <div id="sandbox-container">
                                 <input type="text" name="start_date" type="text" class="form-control" id="startdate"/>
+                                <span id="start" class="error"></span>
                             </div>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
@@ -45,6 +47,7 @@
                         <div style="width: 200px" class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <div id="sandbox-container">
                                 <input type="text" name="end_date" type="text" class="form-control" id="enddate" />
+                                <span id="end" class="error"></span>
 
                             </div>
                             <div class="input-group-addon">
@@ -54,7 +57,7 @@
                         &nbsp;
                         &nbsp;
                         &nbsp;
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary" type="submit" id="submit">
                             <i class="fa fa-print"></i>
                             Print
                         </button>

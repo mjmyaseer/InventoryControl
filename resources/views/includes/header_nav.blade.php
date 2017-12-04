@@ -16,7 +16,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
                                 <ul class="dropdown-menu animated fadeInUp">
-                                    <li><a href="{{url('secure/user/')}}">Profile</a></li>
+                                    <li><a href="{{url('secure/CUser/')}}">Profile</a></li>
                                     <li><a href="{{url('/logout')}}">Logout</a></li>
                                 </ul>
                             </li>

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="content-box-large">
                 <div class="panel-heading">
-                    <div class="panel-title">Stocks Available</div>
+                    <div class="panel-title">Transactions</div>
                 </div>
                 <div class="panel-body">
 

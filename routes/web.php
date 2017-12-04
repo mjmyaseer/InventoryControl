@@ -27,7 +27,7 @@ Route::post('api/sign-in', "Auth\LoginController@doLogin");
 Route::get('logout', "Auth\LoginController@doLogout");
 
 Route::get('/aa', function () {
-    //
+
 })->middleware('authEntry');
 
 //User related Routes
@@ -102,10 +102,24 @@ Route::group(['prefix' => 'secure'], function () {
         Route::post('/reports', 'Reports\ReportsController@saveReports');
 
 
-        Route::get('/users', "Auth\RegisterController@index");
-        Route::get('/users/{id}', "Auth\RegisterController@updateUser");
-        Route::get('/user', "Auth\RegisterController@updateUser");
-//        Route::post('/user', "Auth\RegisterController@editUser");
+        Route::get('/users', "User\UsersController@details");
+        Route::get('/users/{id}', "User\UsersController@getupdateUser");
+        Route::post('/users/{id}', "User\UsersController@saveUser");
+        Route::get('/add-users', "User\UsersController@addUser");
+        Route::post('/add-users', "User\UsersController@saveUser");
+        Route::get('/CUser', "User\UsersController@getupdateUser");
+        Route::post('/CUser', "User\UsersController@updateCurrentUser");
+
+
+
+
+
+//        Route::post('/users/{id}', "Auth\RegisterController@editUser");
+//        Route::get('/user', "Auth\RegisterController@getupdateUser");
+//        Route::post('/user', "Auth\RegisterController@newUser");
+//        Route::get('/Cuser', "Auth\RegisterController@getupdateUser");
+//        Route::post('/Cuser', "Auth\RegisterController@addUser");
+
     });
 });
 

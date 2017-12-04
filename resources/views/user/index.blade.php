@@ -12,8 +12,8 @@
 
                     <div class="panel-options">
 
-                        <a href="{{url('/api/profile')}}"
-                           data-rel="collapse">My Profile</a>
+                        <a href="{{url('secure/add-users')}}"
+                           data-rel="collapse">Add User</a>
                         <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
                 </div>

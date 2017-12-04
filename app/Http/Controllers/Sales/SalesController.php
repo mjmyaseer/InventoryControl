@@ -57,6 +57,7 @@ class SalesController extends Controller
 
     /**
      * @param null $keyword
+     * @param Request $request
      * @return $this
      */
     public function index($keyword = null,Request $request)
@@ -76,6 +77,7 @@ class SalesController extends Controller
      */
     public function addSales()
     {
+
         $categories = $this->category->index();
 
         $items = $this->item->index();

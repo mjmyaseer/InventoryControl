@@ -29,3 +29,63 @@ $(document).ready(function () {
         }
     });
 });
+
+
+$("#submit").click(function () {
+
+    var category=$("#category").val();
+    var startdate= $("#startdate").val();
+    var enddate= $("#enddate").val();
+    alert(category);
+
+    if (category == '' || category == 0 || category == null) {
+        $("#cate").text("Category field is required");
+        return false;
+    }else{
+        $("#cate").text("");
+    }
+
+    if (startdate == '') {
+        $("#start").text("Start Date Field is required");
+        return false;
+    }else{
+        $("#start").text("");
+    }
+
+    if (enddate == '') {
+        $("#end").text("End Date  Field is required");
+        return false;
+    }else{
+        $("#end").text("");
+    }
+
+});
+
+$("#export").click(function () {
+
+    var category=$("#category").val();
+    var startdate= $("#startdate").val();
+    var enddate= $("#enddate").val();
+
+    if (category == '' || category == 0 || category == null) {
+        $("#cate").text("Category field is required");
+        return false;
+    }else{
+        $("#cate").text("");
+    }
+
+    if (startdate == '') {
+        $("#start").text("Start Date Field is required");
+        return false;
+    }else{
+        $("#start").text("");
+    }
+
+    if (enddate == '') {
+        $("#end").text("End Date  Field is required");
+        return false;
+    }else{
+        $("#end").text("");
+    }
+
+});

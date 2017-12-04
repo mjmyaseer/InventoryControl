@@ -16,7 +16,7 @@
             <li class="<?php  if($url == '/secure/customers' || $url == '/secure/add-customers'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/customers")); ?>"><i class="glyphicon glyphicon-king"></i> Customers</a></li>
             <li class="<?php  if($url == '/secure/sales' || $url == '/secure/add-sales'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/sales")); ?>"><i class="glyphicon glyphicon-hand-left"></i> Sales</a></li>
             <li class="<?php  if($url == '/secure/purchase' || $url == '/secure/add-purchase'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/purchase")); ?>"><i class="glyphicon glyphicon-hand-right"></i> Purchase</a></li>
-            <li class="<?php  if($url == '/sign-up.html'){echo $selected;} ?>"> <a href="<?php echo e(url("/sign-up.html")); ?>"><i class="glyphicon glyphicon-user"></i> Users</a></li>
+            <li class="<?php  if($url == '/secure/users'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/users")); ?>"><i class="glyphicon glyphicon-user"></i> Users</a></li>
             <li class="<?php  if($url == '/secure/stocks'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/stocks")); ?>"><i class="glyphicon glyphicon-edit"></i> Stocks</a></li>
             <li class="<?php  if($url == '/secure/purchaseReturns'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/purchaseReturns")); ?>"><i class="glyphicon glyphicon-arrow-left"></i> Purchase Returns</a></li>
             <li class="<?php  if($url == '/secure/salesReturns'){echo $selected;} ?>"> <a href="<?php echo e(url("/secure/salesReturns")); ?>"><i class="glyphicon glyphicon-arrow-right"></i> Sales Returns</a></li>
