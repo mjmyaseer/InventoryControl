@@ -15,7 +15,7 @@ interface PurchaseInterface
 
     public function getIndividualPurchase($id);
 
-    public function savePurchases($data);
+    public function savePurchases($data,$request);
 
-    public function purchaseReturnStatus($id);
+    public function purchaseReturnStatus($id, $request);
 }

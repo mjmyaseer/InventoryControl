@@ -70,10 +70,10 @@ class PurchaseReturnsRepo implements PurchaseReturnsInterface
         return $query;
     }
 
-    public function savePurchaseReturn($data)
+    public function savePurchaseReturn($data, $request)
     {
         app('db')->beginTransaction();
-// TODO: created by
+
         try {
             if (!isset($data['Purchase_returns'])) {
                 foreach ($data as $item) {
@@ -83,7 +83,7 @@ class PurchaseReturnsRepo implements PurchaseReturnsInterface
                     $purchaseReturn->supplier_id = $item['supplier_id'];
                     $purchaseReturn->quantity = $item['quantity'];
                     $purchaseReturn->order_date = date("Y-m-d");
-                    $purchaseReturn->created_by = 1;
+                    $purchaseReturn->created_by = $request->session()->get('userID');
                     $purchaseReturn->save();
                 }
             } else {
@@ -94,7 +94,7 @@ class PurchaseReturnsRepo implements PurchaseReturnsInterface
                 $purchaseReturn->supplier_id = $data['supplier_id'];
                 $purchaseReturn->quantity = $data['quantity'];
                 $purchaseReturn->order_date = date("Y-m-d");
-                $purchaseReturn->created_by = 1;
+                $purchaseReturn->created_by = $request->session()->get('userID');
                 $purchaseReturn->save();
             }
 

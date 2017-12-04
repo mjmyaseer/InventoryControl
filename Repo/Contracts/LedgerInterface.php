@@ -13,9 +13,9 @@ interface LedgerInterface
 {
     public function getLedger();
 
-    public function saveLedgerSales($data);
+    public function saveLedgerSales($data, $request);
 
-    public function saveLedgerPurchases($data);
+    public function saveLedgerPurchases($data,$request);
 
     public function getQuantityBalance($id);
 }

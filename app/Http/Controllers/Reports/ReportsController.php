@@ -34,8 +34,15 @@ class ReportsController extends Controller
         $this->salesReturn = $salesReturn;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $userRole = $request->session()->get('role');
+
+        if ($userRole != 1) {
+            flash()->error('You are not Authorized');
+            return redirect('secure/dashboard.html');
+        }
+
         return view('reports.index');
     }
 

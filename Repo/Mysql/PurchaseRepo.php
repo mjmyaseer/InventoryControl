@@ -65,7 +65,7 @@ class PurchaseRepo implements PurchaseInterface
 
     }
 
-    public function savePurchases($data)
+    public function savePurchases($data,$request)
     {
         app('db')->beginTransaction();
 
@@ -78,6 +78,7 @@ class PurchaseRepo implements PurchaseInterface
                 $grn->quantity = $item['quantity'];
                 $grn->status = 1;
                 $grn->order_date = date("Y-m-d H:i:s",strtotime($data['order_date']));
+                $grn->created_by = $request->session()->get('userID');
                 $grn->save();
             }
 
@@ -101,13 +102,14 @@ class PurchaseRepo implements PurchaseInterface
         }
     }
 
-    public function purchaseReturnStatus($id)
+    public function purchaseReturnStatus($id, $request)
     {
         app('db')->beginTransaction();
 
         try {
         $purchase = $this->purchase->find($id);
         $purchase->status = 2;
+        $purchase->created_by = $request->session()->get('userID');
         $purchase->save();
 
             app('db')->commit();

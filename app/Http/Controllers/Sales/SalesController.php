@@ -30,6 +30,15 @@ class SalesController extends Controller
     private $ledger;
     private $transaction;
 
+    /**
+     * SalesController constructor.
+     * @param CategoryInterface $category
+     * @param ItemInterface $item
+     * @param CustomerInterface $customer
+     * @param SalesInterface $sales
+     * @param LedgerInterface $ledger
+     * @param TransactionInterface $transaction
+     */
     public function __construct(CategoryInterface $category,
                                 ItemInterface $item,
                                 CustomerInterface $customer,
@@ -46,22 +55,29 @@ class SalesController extends Controller
         $this->transaction = $transaction;
     }
 
-    public function index($keyword = null)
+    /**
+     * @param null $keyword
+     * @return $this
+     */
+    public function index($keyword = null,Request $request)
     {
         $sales = $this->sales->index($keyword);
-//dd($sales);
-        return view('sales.index')->with('sales', $sales);
+
+        $data = array(
+            'sales' => $sales,
+            'request' => $request
+        );
+
+        return view('sales.index')->with('sales', $data);
     }
 
-    public function getIndividualInvoice($id)
-    {
-
-    }
-
+    /**
+     * @return $this
+     */
     public function addSales()
     {
         $categories = $this->category->index();
-//        dd($categories);
+
         $items = $this->item->index();
         $customers = $this->customer->index();
 
@@ -73,18 +89,23 @@ class SalesController extends Controller
         return view('sales.add_sales')->with('data', $data);
     }
 
+    /**
+     * @param null $id
+     * @param Request $request
+     * @return mixed
+     */
     public function saveSales($id = null, Request $request)
     {
         $data = $request->all();
 
-        $salesStatus = $this->sales->saveSales($id, $data);
+        $salesStatus = $this->sales->saveSales($id, $data, $request);
 
         if ($salesStatus) {
-            $ledger = $this->ledger->saveLedgerSales($data);
+            $ledger = $this->ledger->saveLedgerSales($data, $request);
         }
 
         if ($salesStatus && $salesStatus) {
-            $transaction = $this->transaction->saveTransactions($data);
+            $transaction = $this->transaction->saveTransactions($data, $request);
         }
 
         $sales = $this->sales->index();

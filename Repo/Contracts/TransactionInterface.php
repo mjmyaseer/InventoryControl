@@ -13,5 +13,5 @@ interface TransactionInterface
 {
     public function index($id = null);
 
-    public function saveTransactions($data);
+    public function saveTransactions($data,$request);
 }

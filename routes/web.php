@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::get('/', "User\UsersController@index");
 Route::get('/sign-up.html', "Auth\RegisterController@signUp");
 Route::post('/sign-up.html', "Auth\RegisterController@newUser");
+Route::post('/sign-up.html/{id}', "Auth\RegisterController@newUser");
 Route::get('/sign-in.html', 'User\UsersController@index');
 Route::post('/sign-in.html', "Auth\LoginController@doLogin");
 Route::post('api/sign-in', "Auth\LoginController@doLogin");
@@ -99,6 +100,12 @@ Route::group(['prefix' => 'secure'], function () {
 
         Route::get('/reports', 'Reports\ReportsController@index');
         Route::post('/reports', 'Reports\ReportsController@saveReports');
+
+
+        Route::get('/users', "Auth\RegisterController@index");
+        Route::get('/users/{id}', "Auth\RegisterController@updateUser");
+        Route::get('/user', "Auth\RegisterController@updateUser");
+//        Route::post('/user', "Auth\RegisterController@editUser");
     });
 });
 

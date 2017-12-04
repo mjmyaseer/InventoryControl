@@ -70,6 +70,7 @@ class CategoryRepo implements CategoryInterface
             $category->title = $request->title;
             $category->description = $request->description;
             $category->status = Category::ACTIVE;
+            $category->created_by = $request->session()->get('userID');
 
             if ($category->save()) {
                 $categories['status'] = [

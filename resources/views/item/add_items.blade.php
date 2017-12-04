@@ -52,8 +52,7 @@
                                 {
                                 echo $item[0]->item_description;
                                 }
-                                    @endphp
-                                </textarea>
+                                    @endphp</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Category Id</label>

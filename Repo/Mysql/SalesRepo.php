@@ -58,7 +58,7 @@ class SalesRepo implements SalesInterface
 
     }
 
-    public function saveSales($id = null, $data)
+    public function saveSales($id = null, $data, $request)
     {
         app('db')->beginTransaction();
 
@@ -75,6 +75,7 @@ class SalesRepo implements SalesInterface
                 $sales->item_id = $item['item'];
                 $sales->quantity = $item['quantity'];
                 $sales->dispatch_date = date("Y-m-d H:i:s", strtotime($data['dispatch_date']));
+                $sales->created_by = $request->session()->get('userID');
                 $sales->save();
             }
 

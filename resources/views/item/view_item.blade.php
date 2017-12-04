@@ -26,6 +26,7 @@
                             <th>#Id</th>
                             <th>Title</th>
                             <th>Unit Price</th>
+                            <th>Max Selling Price</th>
                             <th>Reorder Level</th>
                         </tr>
                         </thead>
@@ -38,6 +39,7 @@
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->title}}</td>
                                 <td>{{$item->unit_price}}</td>
+                                <td>{{$item->max_retail_price}}</td>
                                 <td class="center"> {{$item->reorder_level}}</td>
                             </tr>
                         @endforeach

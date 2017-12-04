@@ -33,7 +33,7 @@
                         @php
                             $x =1
                         @endphp
-                        @foreach($sales as $category)
+                        @foreach($sales['sales'] as $category)
                             <tr class="gradeX">
 
                                 @php
@@ -55,6 +55,9 @@
                                 <td>{{$category->sales_quantity}}</td>
                                 <td>{{$category->dispatch_date}}</td>
                                 <td>Rs. {{$category->unit_price}}</td>
+                                @php
+                                    if ($sales['request']->session()->get('role') == 1){
+                                @endphp
                                 <td width="20px"><!-- Trigger the modal with a button -->
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#myModal-{{$category->id}}" {{$status}}>
@@ -62,6 +65,17 @@
                                     </button>
                                 </td>
                                 @php
+                                    }else{
+                                @endphp
+                                <td width="20px"><!-- Trigger the modal with a button -->
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                            data-target="#myModal-{{$category->id}}" {{$status}} disabled>
+                                        {{$name}}
+                                    </button>
+                                </td>
+                                @php
+                                    }
+
                                     $x++
                                 @endphp
                             </tr>

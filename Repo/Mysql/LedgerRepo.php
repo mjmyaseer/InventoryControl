@@ -10,6 +10,7 @@ namespace Repo\Mysql;
 
 use App\Http\Models\Item;
 use App\Http\Models\Ledger;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Repo\Contracts\ledgerInterface;
 
@@ -62,14 +63,15 @@ class LedgerRepo implements ledgerInterface
     /**
      * @param $data
      * Save all the sales to the ledger table and update quantity(Sales)
+     * @param $request
      * @return array
      */
-    public function saveLedgerSales($data)
+    public function saveLedgerSales($data, $request)
     {
         app('db')->beginTransaction();
         $referenceNumber = date("YmdHis") . rand(1, 9);
 
-// TODO: created by
+
         try {
             if (isset($data['Purchase_returns'])) {
 
@@ -85,7 +87,7 @@ class LedgerRepo implements ledgerInterface
                 $ledger->item_id = $data['item'];
                 $ledger->quantity = $quantity - $data['quantity'];
                 $ledger->transaction_date = date("H-m-d");
-//                $ledger->created_by = $item['created_by'];
+                $ledger->created_by = $request->session()->get('userID');
                 $ledger->save();
 
             }
@@ -103,7 +105,7 @@ class LedgerRepo implements ledgerInterface
                 $ledger->item_id = $data['item'];
                 $ledger->quantity = $quantity + $data['quantity'];
                 $ledger->transaction_date = date("H-m-d");
-//                $ledger->created_by = $item['created_by'];
+                $ledger->created_by = $request->session()->get('userID');
                 $ledger->save();
             }
             else {
@@ -122,7 +124,7 @@ class LedgerRepo implements ledgerInterface
                     $ledger->item_id = $item['item'];
                     $ledger->quantity = $quantity - $item['quantity'];
                     $ledger->transaction_date = date("H-m-d");
-//                $ledger->created_by = $item['created_by'];
+                $ledger->created_by = $request->session()->get('userID');
                     $ledger->save();
                 }
             }
@@ -146,14 +148,14 @@ class LedgerRepo implements ledgerInterface
     /**
      * @param $data
      * Executes the save function to the Purchase Table (Purchase)
+     * @param $request
      * @return array
      */
-    public function saveLedgerPurchases($data)
+    public function saveLedgerPurchases($data,$request)
     {
         app('db')->beginTransaction();
         $referenceNumber = date("YmdHis") . rand(1, 9);
 
-// TODO: created by
         try {
             foreach ($data['order'] as $item) {
                 $quantity = $this->getQuantityBalance($item['item']);
@@ -168,7 +170,7 @@ class LedgerRepo implements ledgerInterface
                 $ledger->item_id = $item['item'];
                 $ledger->quantity = $quantity + $item['quantity'];
                 $ledger->transaction_date = date("H-m-d");
-//                $ledger->created_by = $item['created_by'];
+                $ledger->created_by = $request->session()->get('userID');
                 $ledger->save();
             }
             app('db')->commit();

@@ -1,7 +1,9 @@
 @extends('layout.app_layout')
 
 @section("content")
-
+    <?php
+    //print_r($purchase['request']->session()->get('role'));exit();
+    ?>
     <div class="row">
         <div class="col-md-12">
             <div class="content-box-large">
@@ -31,6 +33,7 @@
                         </thead>
                         <tbody>
                         @php
+
                             $x =1;
                         @endphp
                         @foreach($purchase['purchase'] as $category)
@@ -54,6 +57,9 @@
                                 <td>{{$category->title}}</td>
                                 <td>{{$category->total}}</td>
                                 <td>{{$category->order_date}}</td>
+                                @php
+                                    if ($purchase['request']->session()->get('role') == 1){
+                                @endphp
                                 <td width="20px"><!-- Trigger the modal with a button -->
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#myModal-{{$category->id}}" {{$status}}>
@@ -61,7 +67,18 @@
                                     </button>
                                 </td>
                                 @php
-                                    $x++
+                                    }else{
+                                @endphp
+                                <td width="20px"><!-- Trigger the modal with a button -->
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                            data-target="#myModal-{{$category->id}}" {{$status}} disabled>
+                                        {{$name}}
+                                    </button>
+                                </td>
+                                @php
+                                    }
+
+                                        $x++
                                 @endphp
                             </tr>
 

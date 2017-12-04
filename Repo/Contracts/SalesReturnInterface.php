@@ -15,5 +15,5 @@ interface SalesReturnInterface
 
     public function getSalesReturns($id = null, $keyword = null);
 
-    public function saveSalesReturn($data);
+    public function saveSalesReturn($data, $request);
 }

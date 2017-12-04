@@ -1,3 +1,25 @@
+$("#submit").click(function () {
+    alert('ssss');
+    var email=$("#email").val();
+    var password= $("#password").val();
+
+    if (email == '') {
+        $("#ons").text("Email field is required");
+        return false;
+    }else{
+        $("#ons").text("");
+    }
+
+    if (password == '') {
+        $("#ins").text("Password Field is required");
+        return false;
+    }else{
+        $("#ins").text("");
+    }
+
+});
+
+
 (function($,session){
 
 //console.log('testttt')
@@ -56,3 +78,4 @@
 
 //above parameter pasing method is called "Dependancy Injection"
 //this is a self involking method
+

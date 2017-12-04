@@ -7,6 +7,7 @@ use App\Http\Models\AuthToken;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use \Config;
@@ -72,36 +73,26 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'role' => $data['role'],
         ]);
     }
 
     public function newUser(Request $request)
     {
-        if (!$request->has('first_name')) {
 
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.FIRST_NAME_REQUIRED')
-            ]);
+        $validationRules = [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+        ];
+
+        if (!isset($id)) {
+            $validationRules['first_name'] = 'required|unique:' . User::TABLE . ',first_name';
+            $validationRules['email'] = 'required|unique:' . User::TABLE . ',email';
         }
-        if (!$request->has('last_name')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.LAST_NAME_REQUIRED')
-            ]);
-        }
-        if (!$request->has('email')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.EMAIL_REQUIRED')
-            ]);
-        }
-        if (!$request->has('password')) {
-            return response()->json([
-                'status' => 'FAILED',
-                'error' => Config::get('custom_messages.PASSWORD_REQUIRED')
-            ]);
-        }
+        $this->validate($request, $validationRules);
 
         //Add New User To the System
         try {
@@ -117,6 +108,7 @@ class RegisterController extends Controller
             $user->last_name = $request->last_name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->role = $request->role;
 
             if ($user->save()) {
                 $auth_token = new AuthToken();
@@ -131,6 +123,7 @@ class RegisterController extends Controller
                 unset($user->updated_at);
                 unset($user->password);
                 unset($user->email);
+                unset($user->role);
 
                 return response()->json([
                     'status' => 'SUCCESS',
@@ -156,5 +149,75 @@ class RegisterController extends Controller
     public function signUp()
     {
         return view('user.sign-up');
+    }
+
+    public function updateUser($id = null , Request $request)
+    {
+        $userRole = $request->session()->get('role');
+
+        if ($userRole != 1) {
+            flash()->error('You are not Authorized');
+            return redirect('secure/dashboard.html');
+        }
+
+        if ($id == null || $id == '') {
+            $id = $request->session()->get('userID');
+        }
+
+        $user = User::where("id",$id)->first();
+
+        $data = array(
+            'id' => $user->id,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'role' => $user->role);
+
+        return view('user.profile')->with('user',$data);
+
+    }
+
+    public function editUser(Request $request)
+    {
+        $userRole = $request->session()->get('role');
+
+        if ($userRole != 1) {
+            flash()->error('You are not Authorized');
+            return redirect('secure/dashboard.html');
+        }
+
+        $id = $request->session()->get('userID');
+
+        $user = User::where("id",$id)->first();
+//        dd($user);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->save();
+
+        if(isset($request->password)&& !empty($request->password))
+        {
+            $user->password = $request->password;
+        }else{
+            $user->password = $user->password;
+        }
+        $user->created_by = $request->session()->get('userID');
+
+
+        return Redirect::to('secure/dashboard.html');
+
+    }
+
+    public function index(Request $request)
+    {
+        $userRole = $request->session()->get('role');
+
+        if ($userRole != 1) {
+            flash()->error('You are not Authorized');
+            return redirect('secure/dashboard.html');
+        }
+
+        $users = User::all();
+        return view('user.index')->with('users', $users);
     }
 }

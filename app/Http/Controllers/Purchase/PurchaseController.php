@@ -52,14 +52,15 @@ class PurchaseController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $purchase = $this->purchase->index();
         $purchaseReturns = $this->purchaseReturns->index();
 
         $data = array(
             'purchase' => $purchase,
-            'purchaseReturns' => $purchaseReturns
+            'purchaseReturns' => $purchaseReturns,
+            'request' => $request
         );
         return view('purchase.index')->with('purchase', $data);
     }
@@ -71,11 +72,6 @@ class PurchaseController extends Controller
 
     public function addPurchase(Request $request)
     {
-        $userRole = $request->session()->get('role');
-
-        if ($userRole == 2) {
-            return redirect('secure/dashboard');
-        }
 
         $categories = $this->category->index();
         $items = $this->item->index();
@@ -105,14 +101,14 @@ class PurchaseController extends Controller
 
         $data = $request->all();
 
-        $insert = $this->purchase->savePurchases($data);
+        $insert = $this->purchase->savePurchases($data,$request);
 
         if ($insert) {
-            $ledger = $this->ledger->saveLedgerPurchases($data);
+            $ledger = $this->ledger->saveLedgerPurchases($data,$request);
         }
 
         if ($insert && $ledger) {
-            $transaction = $this->transaction->saveTransactions($data);
+            $transaction = $this->transaction->saveTransactions($data,$request);
         }
 
         $grn = $this->purchase->index();

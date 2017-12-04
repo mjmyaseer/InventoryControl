@@ -62,6 +62,8 @@ class CustomerRepo implements CustomerInterface
             $customer->customer_email = $request->customer_email;
             $customer->customer_telephone = $request->customer_telephone;
             $customer->customer_address = $request->customer_address;
+            $customer->customer_address = $request->customer_address;
+            $customer->created_by = $request->session()->get('userID');
 
             if ($customer->save()) {
                 $customer['status'] = [

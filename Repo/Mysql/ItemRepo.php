@@ -78,6 +78,7 @@ class ItemRepo implements ItemInterface
             $item->reorder_level = $request->reorder_level;
             $item->supplier_id = $request->supplier_id;
             $item->status = Item::ACTIVE;
+            $item->created_by = $request->session()->get('userID');
 
             if ($item->save()) {
                 $item['status'] = [

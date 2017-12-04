@@ -34,7 +34,7 @@ class ReportRepo implements ReportInterface
         try {
             $report = new Reports();
             $report->title = $data->report_category;
-//            $report->created_by = $request->title;
+            $report->created_by = $request->session()->get('userID');
             $report->save();
 
             if ($report->save()) {

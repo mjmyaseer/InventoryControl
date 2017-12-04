@@ -57,7 +57,7 @@ class SalesReturnRepo implements SalesReturnInterface
         return $query;
     }
 
-    public function saveSalesReturn($data)
+    public function saveSalesReturn($data, $request)
     {
         app('db')->beginTransaction();
 // TODO: created by
@@ -70,8 +70,7 @@ class SalesReturnRepo implements SalesReturnInterface
                     $salesReturn->sales_id = $item['customer_id'];
                     $salesReturn->quantity = $item['quantity'];
                     $salesReturn->dispatch_date = date("Y-m-d");
-                    $salesReturn->created_by = 1;
-                    $salesReturn->save();
+                    $salesReturn->created_by = $request->session()->get('userID');
                 }
             } else {
 
@@ -81,7 +80,7 @@ class SalesReturnRepo implements SalesReturnInterface
                 $salesReturn->customer_id = $data['customer_id'];
                 $salesReturn->quantity = $data['quantity'];
                 $salesReturn->dispatch_date = date("Y-m-d");
-                $salesReturn->created_by = 1;
+                $salesReturn->created_by = $request->session()->get('userID');
                 $salesReturn->save();
             }
 

@@ -44,12 +44,11 @@ class TransactionRepo implements TransactionInterface
         return $query;
     }
 
-    public function saveTransactions($data)
+    public function saveTransactions($data,$request)
     {
         app('db')->beginTransaction();
         $referenceNumber = date("YmdHis") . rand(1, 9);
 
-// TODO: created by
         try {
             if (isset($data['Purchase_returns'])) {
                 $transaction_type = 'Purchase Returns';
@@ -61,7 +60,7 @@ class TransactionRepo implements TransactionInterface
                 $transaction->transaction_type = $transaction_type;
                 $transaction->quantity = $data['quantity'];
                 $transaction->transaction_date = date("H-m-d");
-                $transaction->created_by = 1;
+                $transaction->created_by = $request->session()->get('userID');
                 $transaction->save();
 
             }elseif(isset($data['Sales_returns']))
@@ -75,7 +74,7 @@ class TransactionRepo implements TransactionInterface
                 $transaction->transaction_type = $transaction_type;
                 $transaction->quantity = $data['quantity'];
                 $transaction->transaction_date = date("H-m-d");
-                $transaction->created_by = 1;
+                $transaction->created_by = $request->session()->get('userID');
                 $transaction->save();
             }
             else{
@@ -97,7 +96,7 @@ class TransactionRepo implements TransactionInterface
                     $transaction->transaction_type = $transaction_type;
                     $transaction->quantity = $item['quantity'];
                     $transaction->transaction_date = date("H-m-d");
-                    $transaction->created_by = 1;
+                    $transaction->created_by = $request->session()->get('userID');
                     $transaction->save();
                 }
             }

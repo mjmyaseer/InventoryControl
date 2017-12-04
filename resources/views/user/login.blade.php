@@ -15,10 +15,12 @@
                                 <strong class="alert-title">Failed</strong>
                                 <span class="alert-body"></span>
                             </div>
-                            <input class="form-control" name="email" type="email" placeholder="E-mail address">
-                            <input class="form-control" name="password" type="password" placeholder="Password">
+                            <input class="form-control" id="email" name="email" type="email" placeholder="E-mail address">
+                            <span id="ons" class="error"></span>
+                            <input class="form-control" id="password" name="password" type="password" placeholder="Password">
+                            <span id="ins" class="error"></span>
                             <div class="action">
-                                <button type="submit" class="btn btn-primary signup" >Login</button>
+                                <button type="submit" id="submit" class="btn btn-primary signup" >Login</button>
                             </div>
                         </div>
                     </form>

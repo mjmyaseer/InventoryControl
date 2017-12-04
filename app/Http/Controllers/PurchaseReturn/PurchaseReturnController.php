@@ -50,13 +50,13 @@ class PurchaseReturnController extends Controller
 
         $id = $request->get('Purchase_id');
 
-        $purchaseReturn = $this->purchaseReturns->savePurchaseReturn($data);
+        $purchaseReturn = $this->purchaseReturns->savePurchaseReturn($data, $request);
 
-        $purchaseReturnStatus = $this->purchase->purchaseReturnStatus($id);
+        $purchaseReturnStatus = $this->purchase->purchaseReturnStatus($id, $request);
 
-        $ledger = $this->ledger->saveLedgerSales($data);
+        $ledger = $this->ledger->saveLedgerSales($data, $request);
 
-        $transaction = $this->transaction->saveTransactions($data);
+        $transaction = $this->transaction->saveTransactions($data, $request);
 
         $purchaseReturns = $this->purchaseReturns->getPurchaseReturns();
 

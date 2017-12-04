@@ -61,6 +61,7 @@ class SupplierRepo implements SupplierInterface
             $supplier->supplier_telephone = $request->supplier_telephone;
             $supplier->supplier_email = $request->supplier_email;
             $supplier->supplier_address = $request->supplier_address;
+            $supplier->created_by = $request->session()->get('userID');
 
             if ($supplier->save()) {
                 $suppliers['status'] = [

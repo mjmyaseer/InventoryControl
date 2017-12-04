@@ -49,18 +49,18 @@ class SalesReturnController extends Controller
 
         $id = $request->get('Sales_id');
 
-        $salesReturn = $this->salesReturn->saveSalesReturn($data);
+        $salesReturn = $this->salesReturn->saveSalesReturn($data, $request);
 
         if ($salesReturn) {
             $salesReturnStatus = $this->sales->salesReturnStatus($id);
         }
 
         if ($salesReturn && $salesReturnStatus) {
-            $ledger = $this->ledger->saveLedgerSales($data);
+            $ledger = $this->ledger->saveLedgerSales($data, $request);
         }
 
         if ($salesReturn && $salesReturnStatus && $ledger) {
-            $transaction = $this->transaction->saveTransactions($data);
+            $transaction = $this->transaction->saveTransactions($data, $request);
         }
 
         $salesReturns = $this->salesReturn->getSalesReturns();

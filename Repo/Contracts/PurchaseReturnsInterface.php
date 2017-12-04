@@ -15,5 +15,5 @@ interface PurchaseReturnsInterface
 
     public function getPurchaseReturns($id = null,$keyword = null);
 
-    public function savePurchaseReturn($data);
+    public function savePurchaseReturn($data, $request);
 }
