@@ -11,7 +11,7 @@
                     <div class="panel-options">
                         <a href="{{url('/secure/add-sales')}}"
                            data-rel="collapse">New Sales</a>
-                        <a href="{{url('sales')}}" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                        <a href="{{url('secure/sales')}}" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">

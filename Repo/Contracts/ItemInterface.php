@@ -17,4 +17,6 @@ interface ItemInterface
     public function saveItem($id = null,$request);
 
     public function inactiveItem();
+
+    public function getCategoryItems($id);
 }

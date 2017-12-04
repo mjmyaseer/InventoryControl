@@ -38,7 +38,7 @@ class PurchaseRepo implements PurchaseInterface
     {
         $query = DB::table(Purchase::TABLE)
             ->select(Purchase::TABLE.'.*',Item::TABLE.'.*',Supplier::TABLE.'.*',
-                Supplier::TABLE.'.id as supplier_id',Purchase::TABLE.'.quantity as total',Purchase::TABLE.'.id as id',
+                Supplier::TABLE.'.id as supplier_id',Purchase::TABLE.'.quantity as quantity',Purchase::TABLE.'.id as id',
                 Item::TABLE.'.id as item_id',Purchase::TABLE.'.created_at as created_at',
                 Purchase::TABLE.'.updated_at as updated_at',Purchase::TABLE.'.status as status')
             ->leftJoin(Item::TABLE, Item::TABLE . '.id', '=', Purchase::TABLE . '.item_id')

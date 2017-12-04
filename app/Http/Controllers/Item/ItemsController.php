@@ -36,18 +36,24 @@ class ItemsController extends Controller
         $this->supplier = $supplier;
     }
 
+    /**
+     * @return $this
+     */
     public function index()
     {
         $items = Item::all();
         return view('item.index')->with('items', $items);
     }
 
+    /**
+     * @param null $id
+     * @return $this
+     */
     public function addItem($id = null)
     {
         if (isset($id) && $id != null) {
 
             $item = $this->item->index($id);
-//            dd($item);
             $categories = $this->category->index();
             $suppliers = $this->supplier->index();
             $data = array(
@@ -67,15 +73,22 @@ class ItemsController extends Controller
         return view('item.add_items')->with($data);
     }
 
+    /**
+     * @param $id
+     * @return $this
+     */
     public function viewItem($id)
     {
-        //$items = Item::all();
-        //$items = Item::all()->sortBy("title");
         $items = Item::all()->where('id', $id);
 
         return view('item.view_item')->with('items', $items);
     }
 
+    /**
+     * @param null $id
+     * @param Request $request
+     * @return mixed
+     */
     public function saveItem($id = null, Request $request)
     {
 
@@ -104,8 +117,20 @@ class ItemsController extends Controller
         }
     }
 
+    /**
+     *
+     */
     public function relation()
     {
         $this->item->inactiveItem();
+    }
+
+    public function getCategoryItems(Request $request)
+    {
+        $data = $request->all();
+
+        $result = $this->item->getCategoryItems($data['id']);
+
+        return \response()->json($result);
     }
 }

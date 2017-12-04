@@ -44,7 +44,7 @@
                             <div id="input_fields_wrap" class="form-group form-inline">
                                 <div>
                                     <label>Category</label>&nbsp;
-                                    <select class="form-control" style="width: 200px" type="text"
+                                    <select class="form-control" id="category" style="width: 200px" type="text"
                                             name="order[1][category]">
                                         <option value="0" selected disabled>Select a Category</option>
                                         @foreach($data['categories'] as $items)
@@ -53,7 +53,7 @@
                                     </select>&nbsp;&nbsp;&nbsp;&nbsp;
 
                                     <label>Item</label>&nbsp;
-                                    <select class="form-control" style="width: 200px" type="text"
+                                    <select class="form-control" id="items" style="width: 200px" type="text"
                                             name="order[1][item]">
                                         <option value="0" selected disabled>Select an Item</option>
                                         @foreach($data['items'] as $items)

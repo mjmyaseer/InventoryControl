@@ -9,6 +9,7 @@
 namespace Repo\Mysql;
 
 use App\Http\Models\Item;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Repo\Contracts\ItemInterface;
@@ -107,5 +108,13 @@ class ItemRepo implements ItemInterface
         $phone = Item::find(1)->Supplier();
     }
 
+    public function getCategoryItems($id)
+    {
+        $result = DB::table(Item::TABLE)
+            ->select('id', 'title')
+            ->where('category_id','=',$id)
+            ->get();
 
+        return $result;
+    }
 }

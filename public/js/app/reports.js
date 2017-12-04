@@ -36,7 +36,6 @@ $("#submit").click(function () {
     var category=$("#category").val();
     var startdate= $("#startdate").val();
     var enddate= $("#enddate").val();
-    alert(category);
 
     if (category == '' || category == 0 || category == null) {
         $("#cate").text("Category field is required");

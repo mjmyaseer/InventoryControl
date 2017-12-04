@@ -66,6 +66,7 @@ class ReportsController extends Controller
 
             } elseif ($category == 2) {
                 $purchase = $this->purchase->index($keyword);
+
                 $pdf = PDF::loadView('print.purchase', ['purchase' => $purchase]);
                 return $pdf->download('customer.pdf');
 
@@ -82,7 +83,7 @@ class ReportsController extends Controller
         } else {
             if ($category == 1) {
                 $sales = $this->sales->index($keyword);
-
+//dd($sales);
                 return view('print.sales')->with('sales', $sales);
             } elseif ($category == 2) {
                 $purchase = $this->purchase->index($keyword);

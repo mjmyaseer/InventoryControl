@@ -22,10 +22,10 @@ $(document).ready(function () {
         format: "dd MM yyyy",
     });
 
-    $('#sandbox-container input').on('show', function(e){
+    $('#sandbox-container input').on('show', function (e) {
         console.debug('show', e.date, $(this).data('stickyDate'));
 
-        if ( e.date ) {
+        if (e.date) {
             $(this).data('stickyDate', e.date);
         }
         else {
@@ -33,11 +33,11 @@ $(document).ready(function () {
         }
     });
 
-    $('#sandbox-container input').on('hide', function(e){
+    $('#sandbox-container input').on('hide', function (e) {
         console.debug('hide', e.date, $(this).data('stickyDate'));
         var stickyDate = $(this).data('stickyDate');
 
-        if ( !e.date && stickyDate ) {
+        if (!e.date && stickyDate) {
             console.debug('restore stickyDate', stickyDate);
             $(this).datepicker('setDate', stickyDate);
             $(this).data('stickyDate', null);
@@ -45,3 +45,27 @@ $(document).ready(function () {
     });
 });
 
+$("#category").change(function () {
+
+    var category = $("#category").val();
+
+    $.ajax({
+        method: "get",
+        url: '/InventoryControl/public/secure/cat-items',
+        data: {id: category}
+    }).done(function (data) {
+        if (data) {
+            var selOpts = "";
+            $('#items').html('');
+            $.each(data, function (k, v) {
+                var id = data[k].id;
+                var val = data[k].title;
+                selOpts += "<option value='" + id + "'>" + val + "</option>";
+            });
+            $('#items').append(selOpts);
+
+        } else {
+
+        }
+    });
+});

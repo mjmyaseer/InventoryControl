@@ -24,11 +24,20 @@ class ReportRepo implements ReportInterface
     protected $order_date = 1;
     protected $created_by = 1;
     protected $updated_at = 1;
+
+    /**
+     * ReportRepo constructor.
+     * @param Reports $reports
+     */
     public function __construct(Reports $reports)
     {
         $this->reports = $reports;
     }
 
+    /**
+     * @param $data
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function insertReport($data)
     {
         try {

@@ -111,7 +111,7 @@ Route::group(['prefix' => 'secure'], function () {
         Route::post('/CUser', "User\UsersController@updateCurrentUser");
 
 
-
+        Route::get('/cat-items', "Item\ItemsController@getCategoryItems");
 
 
 //        Route::post('/users/{id}', "Auth\RegisterController@editUser");
