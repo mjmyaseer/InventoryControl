@@ -36,6 +36,7 @@ class ReportsController extends Controller
 
     public function index(Request $request)
     {
+
         $userRole = $request->session()->get('role');
 
         if ($userRole != 1) {

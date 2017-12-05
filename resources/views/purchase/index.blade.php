@@ -55,7 +55,7 @@
                                 <td>{{$x}}</td>
                                 <td>{{$category->supplier_name}}</td>
                                 <td>{{$category->title}}</td>
-                                <td>{{$category->total}}</td>
+                                <td>{{$category->quantity}}</td>
                                 <td>{{$category->order_date}}</td>
                                 @php
                                     if ($purchase['request']->session()->get('role') == 1){
@@ -115,7 +115,7 @@
                                                     <div class="form-group">
                                                         <label>Quantity</label>
                                                         <input class="form-control"
-                                                               value="{{$category->total}}"
+                                                               value="{{$category->quantity}}"
                                                                type="text"
                                                                name="quantity" readonly/>
                                                     </div>

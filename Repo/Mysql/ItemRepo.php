@@ -117,4 +117,14 @@ class ItemRepo implements ItemInterface
 
         return $result;
     }
+
+    public function getReorderLevel($id)
+    {
+        $result = DB::table(Item::TABLE)
+            ->select('title','reorder_level')
+            ->where('id','=',$id)
+            ->get();
+
+        return $result;
+    }
 }

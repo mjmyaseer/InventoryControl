@@ -102,6 +102,11 @@ class SalesController extends Controller
 
         $salesStatus = $this->sales->saveSales($id, $data, $request);
 
+        if($salesStatus['code'] == 420){
+            flash()->error('Sorry!. Item '.$salesStatus['title'].' Only Has '.$salesStatus['balance'].' Items Left');
+            return Redirect::to('secure/add-sales');
+        }
+
         if ($salesStatus) {
             $ledger = $this->ledger->saveLedgerSales($data, $request);
         }

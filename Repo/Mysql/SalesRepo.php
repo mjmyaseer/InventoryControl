@@ -10,18 +10,29 @@ namespace Repo\Mysql;
 
 use App\Http\Models\Category;
 use App\Http\Models\Customer;
+use App\Http\Models\Ledger;
 use App\Http\Models\Sales;
 use App\Http\Models\Item;
+use App\Http\SendEmail;
 use Illuminate\Support\Facades\DB;
 use Repo\Contracts\SalesInterface;
 
 class SalesRepo implements SalesInterface
 {
     private $sales;
+    private $ledger;
+    private $itemRepo;
+    private $sendEmail;
 
-    public function __construct(Sales $sales)
+    public function __construct(Sales $sales,
+                                LedgerRepo $ledger,
+                                ItemRepo $itemRepo,
+                                SendEmail $sendEmail)
     {
         $this->sales = $sales;
+        $this->ledger = $ledger;
+        $this->itemRepo = $itemRepo;
+        $this->sendEmail = $sendEmail;
     }
 
     public function index($keyword = null)
@@ -69,6 +80,17 @@ class SalesRepo implements SalesInterface
                 } else {
                     $sales = new Sales;
                 }
+                $quantityBalance = $this->ledger->getQuantityBalance($item['item']);
+                $reorderLevel = $this->itemRepo->getReorderLevel($item['item']);
+
+                if($quantityBalance[0]->quantity < $item['quantity']){
+
+                    $result['code'] = 420;
+                    $result['title'] = $reorderLevel[0]->title;
+                    $result['balance'] = $quantityBalance[0]->quantity;
+
+                    return $result;
+                }
 
                 $sales->customer_id = $data['customer_id'];
                 $sales->category_id = $item['category'];
@@ -77,6 +99,20 @@ class SalesRepo implements SalesInterface
                 $sales->dispatch_date = date("Y-m-d H:i:s", strtotime($data['dispatch_date']));
                 $sales->created_by = $request->session()->get('userID');
                 $sales->save();
+
+
+
+
+
+
+                if ($quantityBalance[0]->quantity <= $reorderLevel[0]->reorder_level) {
+
+                    $msg = 'The Item '.$reorderLevel[0]->title .' Has Reached its Re-Order Level. Please Purchase More';
+                    $subject = 'Stock Limit Reached';
+                    $sender = 'myaseer12@gmail.com';
+                    $mailresult = $this->sendEmail->sendEmail($msg,$subject,$sender);
+//                    dd($mailresult);
+                }
             }
 
             app('db')->commit();
@@ -122,7 +158,7 @@ class SalesRepo implements SalesInterface
 
             app('db')->rollback();
 
-            return $sales['status'] =  [
+            return $sales['status'] = [
                 'status' => $ex->getMessage(),
                 'message' => $ex->getMessage(),
                 'code' => '422'

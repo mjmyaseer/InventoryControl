@@ -19,4 +19,6 @@ interface ItemInterface
     public function inactiveItem();
 
     public function getCategoryItems($id);
+
+    public function getReorderLevel($id);
 }
