@@ -68,4 +68,15 @@ class CustomersController extends Controller
         }
 
     }
+
+    public function searchByCustomerName(Request $request)
+    {
+        $data = $request->all();
+
+        $keyword['customer_name'] = $request->get('keyword');
+
+        $customer = $this->customer->index($keyword);
+
+        return \response()->json($customer);
+    }
 }

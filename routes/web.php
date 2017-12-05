@@ -116,6 +116,8 @@ Route::group(['prefix' => 'secure'], function () {
 //search
         Route::get('/sear-customers', "Sales\SalesController@searchSalesByCustomer");
         Route::get('/sear-purchasers', "Purchase\PurchaseController@searchPurchaseBySupplier");
+        Route::get('/sear-cux', "Customer\CustomersController@searchByCustomerName");
+        Route::get('/sear-supp', "Supplier\SuppliersController@searchBySupplierName");
 
     });
 });

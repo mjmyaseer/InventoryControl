@@ -18,6 +18,22 @@
                 </div>
                 <div class="panel-body">
 
+                    <div id="input_fields_wrap" class="form-group form-inline">
+                        <div>
+                            <label>Search By Customer Name</label>&nbsp;
+                            <input class="form-control"
+                                   placeholder="Search"
+                                   type="text"
+                                   style="widows: 50px;"
+                                   name="search_txt"
+                                   id="search_txt"/>&nbsp;
+
+                            <button type="button" id="search_button" class="btn btn-info">Search
+                            </button>
+                            <span id="sear_txt" class="error"></span>
+                        </div>
+                    </div>
+
                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
                         <thead>
                         <tr>
@@ -55,4 +71,8 @@
 
     </div>
 
+@endsection
+
+@section('js')
+    <script src="../js/app/supplierIndex.js"></script>
 @endsection

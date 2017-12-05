@@ -40,9 +40,21 @@ class CustomerRepo implements CustomerInterface
                 Customer::TABLE.'.customer_address as customer_address',
                 Customer::TABLE.'.created_at as supplier_created_at',
                 Customer::TABLE.'.updated_at as supplier_updated_at');
-        if ($id != '') {
+        if ($id != '' && !isset($id['customer_name'])) {
             $query->where(Customer::TABLE . '.id', '=', $id);
         }
+
+        if (isset($id['customer_name']) && $id['customer_name'] != '') {
+
+            $query->where(Customer::TABLE . '.customer_name', 'like', '%' . $id['customer_name'] . '%');
+            $query->orwhere(Customer::TABLE . '.customer_code', 'like', '%' . $id['customer_name'] . '%');
+
+            $results = $query->orderBy(Customer::TABLE . '.id', 'DESC')
+                ->get();
+
+            return $results;
+        }
+
         $results = $query->get();
 
         return $results;

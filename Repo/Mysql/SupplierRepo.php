@@ -39,9 +39,21 @@ class SupplierRepo implements SupplierInterface
                 Supplier::TABLE.'.supplier_address as supplier_address',
                 Supplier::TABLE.'.created_at as supplier_created_at',
                 Supplier::TABLE.'.updated_at as supplier_updated_at');
-        if ($id != '') {
+        if ($id != '' && !isset($id['supplier_name'])) {
             $query->where(Supplier::TABLE . '.id', '=', $id);
         }
+
+        if (isset($id['supplier_name']) && $id['supplier_name'] != '') {
+
+            $query->where(Supplier::TABLE . '.supplier_name', 'like', '%' . $id['supplier_name'] . '%');
+            $query->orwhere(Supplier::TABLE . '.supplier_code', 'like', '%' . $id['supplier_name'] . '%');
+
+            $results = $query->orderBy(Supplier::TABLE . '.id', 'DESC')
+                ->get();
+
+            return $results;
+        }
+
         $results = $query->get();
 
         return $results;

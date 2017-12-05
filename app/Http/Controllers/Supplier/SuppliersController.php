@@ -69,4 +69,16 @@ class SuppliersController extends Controller
         }
 
     }
+
+
+    public function searchBySupplierName(Request $request)
+    {
+        $data = $request->all();
+
+        $keyword['supplier_name'] = $request->get('keyword');
+
+        $supplier = $this->supplier->index($keyword);
+
+        return \response()->json($supplier);
+    }
 }
