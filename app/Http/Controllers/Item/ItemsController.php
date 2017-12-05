@@ -104,6 +104,7 @@ class ItemsController extends Controller
         if (!isset($id)) {
             $validationRules['title'] = 'required|unique:' . Item::TABLE . ',title';
         }
+        $this->validate($request, $validationRules);
 
         $itemsStatus = $this->item->saveItem($id, $request);
         $items = $itemsStatus['result'];

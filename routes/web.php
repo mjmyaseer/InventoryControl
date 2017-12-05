@@ -113,12 +113,9 @@ Route::group(['prefix' => 'secure'], function () {
 
         Route::get('/cat-items', "Item\ItemsController@getCategoryItems");
 
-
-//        Route::post('/users/{id}', "Auth\RegisterController@editUser");
-//        Route::get('/user', "Auth\RegisterController@getupdateUser");
-//        Route::post('/user', "Auth\RegisterController@newUser");
-//        Route::get('/Cuser', "Auth\RegisterController@getupdateUser");
-//        Route::post('/Cuser', "Auth\RegisterController@addUser");
+//search
+        Route::get('/sear-customers', "Sales\SalesController@searchSalesByCustomer");
+        Route::get('/sear-purchasers', "Purchase\PurchaseController@searchPurchaseBySupplier");
 
     });
 });

@@ -135,4 +135,16 @@ class SalesController extends Controller
             flash()->error($transaction['message']);
         }
     }
+
+    public function searchSalesByCustomer(Request $request)
+    {
+        $data = $request->all();
+
+
+        $keyword['customer_name'] = $request->get('keyword');
+
+        $sales = $this->sales->index($keyword);
+
+        return \response()->json($sales);
+    }
 }

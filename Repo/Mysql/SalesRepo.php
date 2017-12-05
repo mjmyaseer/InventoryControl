@@ -47,11 +47,21 @@ class SalesRepo implements SalesInterface
             ->leftJoin(Item::TABLE, Item::TABLE . '.id', '=', Sales::TABLE . '.item_id')
             ->leftJoin(Customer::TABLE, Customer::TABLE . '.id', '=', Sales::TABLE . '.customer_id');
 
-        if ($keyword['start_date'] != '') {
+        if (isset($keyword['start_date']) && $keyword['start_date'] != '') {
 
             $query->where(Sales::TABLE . '.dispatch_date', '>=', $keyword['start_date'])
                 ->where(Sales::TABLE . '.dispatch_date', '<=', $keyword['end_date'])
                 ->where(Sales::TABLE . '.status', '=', 1);
+
+            $results = $query->orderBy(Sales::TABLE . '.id', 'DESC')
+                ->get();
+
+            return $results;
+        }
+
+        if (isset($keyword['customer_name']) && $keyword['customer_name'] != '') {
+
+            $query->where(Customer::TABLE . '.customer_name', 'like', '%' . $keyword['customer_name'] . '%');
 
             $results = $query->orderBy(Sales::TABLE . '.id', 'DESC')
                 ->get();

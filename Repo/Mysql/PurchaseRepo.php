@@ -44,7 +44,7 @@ class PurchaseRepo implements PurchaseInterface
             ->leftJoin(Item::TABLE, Item::TABLE . '.id', '=', Purchase::TABLE . '.item_id')
             ->leftJoin(Supplier::TABLE, Supplier::TABLE . '.id', '=', Purchase::TABLE . '.supplier_id');
 
-            if ($keyword['start_date'] != '') {
+        if (isset($keyword['start_date']) && $keyword['start_date'] != '') {
                 $query->where(Purchase::TABLE . '.order_date', '>=', $keyword['start_date'])
                     ->where(Purchase::TABLE . '.order_date', '<=', $keyword['end_date']);
 
@@ -53,6 +53,16 @@ class PurchaseRepo implements PurchaseInterface
 
                 return $results;
             }
+
+        if (isset($keyword['supplier_name']) && $keyword['supplier_name'] != '') {
+
+            $query->where(Supplier::TABLE . '.supplier_name', 'like', '%' . $keyword['supplier_name'] . '%');
+
+            $results = $query->orderBy(Purchase::TABLE . '.id', 'DESC')
+                ->get();
+
+            return $results;
+        }
 
         $results = $query->orderBy(Purchase::TABLE . '.id', 'DESC')
             ->paginate(10);

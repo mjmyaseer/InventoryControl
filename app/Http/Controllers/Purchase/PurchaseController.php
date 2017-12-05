@@ -125,4 +125,18 @@ class PurchaseController extends Controller
         }
 
     }
+
+    public function searchPurchaseBySupplier(Request $request)
+    {
+
+
+        $data = $request->all();
+
+
+        $keyword['supplier_name'] = $request->get('keyword');
+
+        $purchases = $this->purchase->index($keyword);
+
+        return \response()->json($purchases);
+    }
 }
