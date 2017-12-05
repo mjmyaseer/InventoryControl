@@ -30,7 +30,7 @@ $("#search_button").click(function () {
                 "<th>Address</th>" +
                 "<th>Edit</th>" +
                 "</tr></thead>";
-
+            var cal = 1;
             $.each(data, function (k, v) {
                 var id = data[k].customer_id;
                 var customer_code = data[k].customer_code;
@@ -40,7 +40,7 @@ $("#search_button").click(function () {
                 var customer_address = data[k].customer_address;
 
                 selOpts += "<tr class='gradeX'>" +
-                    "<td>" + id + "</td>" +
+                    "<td>" + cal + "</td>" +
                     "<td>" + customer_code + "</td>" +
                     "<td>" + customer_name + "</td>" +
                     "<td>" + customer_email + "</td>" +
@@ -48,7 +48,7 @@ $("#search_button").click(function () {
                     "<td>" + customer_address + "</td>" +
                     "<td style='text-align: center'>" +
                     "<a href='/InventoryControl/public/secure/add-customers/"+ id +"'>Edit</a></td>";
-
+                cal ++;
             });
             $('#example').append(selOpts);
 

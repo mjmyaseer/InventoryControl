@@ -15,7 +15,6 @@ $("#search_button").click(function () {
         data: {keyword: category}
     }).done(function (data) {
         if (data) {
-
             var selOpts = "";
             $('#example').html('');
 
@@ -28,7 +27,7 @@ $("#search_button").click(function () {
                 "<th>Address</th>" +
                 "<th>Edit</th>" +
                 "</tr></thead>";
-
+            var cal = 1;
             $.each(data, function (k, v) {
                 var id = data[k].supplier_id;
                 var supplier_code = data[k].supplier_code;
@@ -37,8 +36,9 @@ $("#search_button").click(function () {
                 var supplier_telephone = data[k].supplier_telephone;
                 var supplier_address = data[k].supplier_address;
 
+
                 selOpts += "<tr class='gradeX'>" +
-                    "<td>" + id + "</td>" +
+                    "<td>" + cal + "</td>" +
                     "<td>" + supplier_code + "</td>" +
                     "<td>" + supplier_name + "</td>" +
                     "<td>" + supplier_email + "</td>" +
@@ -46,7 +46,7 @@ $("#search_button").click(function () {
                     "<td>" + supplier_address + "</td>" +
                     "<td style='text-align: center'>" +
                     "<a href='/InventoryControl/public/secure/add-suppliers/"+ id +"'>Edit</a></td>";
-
+                cal ++;
             });
             $('#example').append(selOpts);
 

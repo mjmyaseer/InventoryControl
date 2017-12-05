@@ -4,6 +4,7 @@
             <div class="col-md-10">
                 <!-- Logo -->
                 <div class="logo">
+
                     <h1><a href="{{url('/secure/dashboard.html')}}">Mobile Planet</a></h1>
                 </div>
             </div>

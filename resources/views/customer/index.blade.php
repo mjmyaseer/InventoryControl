@@ -47,10 +47,12 @@
                         </tr>
                         </thead>
                         <tbody>
-
+@php
+$x = 1;
+@endphp
                         @foreach($customers as $key=>$customer)
                             <tr class="gradeX">
-                                <td>{{$customer->customer_id}}</td>
+                                <td>{{$x}}</td>
                                 <td>{{$customer->customer_code}}</td>
                                 <td>{{$customer->customer_name}}</td>
                                 <td>{{$customer->customer_email}}</td>
@@ -58,6 +60,9 @@
                                 <td class="center">{{$customer->customer_address}}</td>
                                 <td style="text-align: center"><a href="{{url("/secure/add-customers/{$customer->customer_id}")}}" >Edit</a></td>
                             </tr>
+                            @php
+                                $x++;
+                            @endphp
                         @endforeach
 
 
